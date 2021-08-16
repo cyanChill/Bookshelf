@@ -6,26 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
-    <button id="new-book" class="btn">New Book</button>
-    <form>
-      <input id="title" name="title" type="text" placeholder="Title" />
-      <input id="author" name="author" type="text" placeholder="Author" />
-      <input id="pages" name=pages" type="number" placeholder="Number of Pages">
-      <input
-        id="read"
-        name="read"
-        type="text"
-        placeholder="Has Been Read (yes/no)"
-      />
-      <label for="title">Title: </label>
-      <label for="author">Author: </label>
-      <label for="pages">Number of Pages: </label>
-      <label for="read">Read: </label>
-      <input type="submit" name="submit" id="submit-btn" class="btn" />
-    </form>
+    <button id="new-book" class="btn">Add New Book</button>
+    <div id="book-form-screen" data-outside>
+      <form id="add-book">
+        <input id="title" name="title" type="text" placeholder="Title" />
+        <input id="author" name="author" type="text" placeholder="Author" />
+        <input id="pages" name=pages" type="number" placeholder="Number of
+        Pages">
+        <label for="read">
+          Have you read it?
+          <input id="read" name="read" type="checkbox" />
+        </label>
+        <input type="submit" name="submit" id="submit-btn" class="btn" />
+      </form>
+    </div>
     <div id="library"></div>
   </body>
 </html>
