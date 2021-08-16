@@ -10,19 +10,23 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <button id="new-book" class="btn">Add New Book</button>
+    <nav id="nav-bar">
+      <span class="logo-text">Library</span>
+      <button id="new-book" class="btn">Add New Book</button>
+    </nav>
 
     <div id="book-form-screen" data-outside>
       <form id="add-book">
         <input id="title" name="title" type="text" placeholder="Title" />
         <input id="author" name="author" type="text" placeholder="Author" />
-        <input id="pages" name=pages" type="number" placeholder="Pages" min=1 max=99999 />
+        <input id="pages" name=pages" type="number" placeholder="Pages" min=1
+        max=99999 />
 
         <label for="read">
           Have you read it?
           <input id="read" name="read" type="checkbox" />
         </label>
-        
+
         <input type="submit" name="submit" id="submit-btn" class="btn" />
       </form>
     </div>
