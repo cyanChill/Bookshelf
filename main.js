@@ -1,6 +1,6 @@
 const body = document.querySelector("body");
 const library = document.getElementById("library");
-const newBookBtn = document.getElementById("new-book");
+const addNewBookBtn = document.getElementById("new-book");
 const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
 
@@ -25,19 +25,14 @@ function loadBooks() {}
 
 function addBookToDisplay() {}
 
-newBookBtn.addEventListener("click", showForm);
+addNewBookBtn.addEventListener("click", showForm);
 
 // Listen to when form is submitted
-document.addEventListener("submit", hideForm);
+document.addEventListener("submit", submitForm);
 
-function hideForm(e) {
+function submitForm(e) {
   e.preventDefault();
-  document.removeEventListener("click", exitForm);
   addBookForm.reset();
-  bookFormScreen.classList.remove(
-    "add-book-form-enter",
-    "add-book-form-active"
-  );
 }
 
 function showForm() {
@@ -49,10 +44,20 @@ function showForm() {
     150
   );
   bookFormScreen.classList.add("active");
-  // Listen to if we click outside the form (to close)
+  // Listen to if we click outside the form (to close "add form" screen)
   document.addEventListener("click", (e) => {
-    if (e.target.dataset.hasOwnProperty("outside")) hideForm(e);
+    if (e.target.dataset.hasOwnProperty("outside")) {
+      hideForm();
+    }
   });
+}
+
+function hideForm() {
+  document.removeEventListener("click", exitForm);
+  bookFormScreen.classList.remove(
+    "add-book-form-enter",
+    "add-book-form-active"
+  );
 }
 
 function exitForm() {
