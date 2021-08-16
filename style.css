@@ -9,6 +9,10 @@ input {
   margin: 0.5em 0;
 }
 
+input[type="checkbox"] {
+    margin: 0.5em;
+}
+
 input[type="text"],
 input[type="submit"],
 input[type="number"] {
@@ -62,4 +66,9 @@ form#add-book {
   background-color: rgb(236, 236, 236);
   padding: 1em;
   border-radius: 0.5em;
+}
+
+form#add-book label[for="read"] {
+    display: flex;
+    justify-content: center;
 }

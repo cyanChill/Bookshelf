@@ -5,24 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
   </head>
   <body>
     <button id="new-book" class="btn">Add New Book</button>
+
     <div id="book-form-screen" data-outside>
       <form id="add-book">
         <input id="title" name="title" type="text" placeholder="Title" />
         <input id="author" name="author" type="text" placeholder="Author" />
-        <input id="pages" name=pages" type="number" placeholder="Number of
-        Pages">
+        <input id="pages" name=pages" type="number" placeholder="Pages" min=1 max=99999 />
+
         <label for="read">
           Have you read it?
           <input id="read" name="read" type="checkbox" />
         </label>
+        
         <input type="submit" name="submit" id="submit-btn" class="btn" />
       </form>
     </div>
+
     <div id="library"></div>
   </body>
 </html>
