@@ -115,7 +115,20 @@ form#add-book label[for="read"] {
 }
 
 .book-card img {
-  width: 5rem;
+  display: none;
+}
+
+.bookCard-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+}
+
+.book-info {
+  margin-bottom: 0.5em;
 }
 
 .book-info > * {
@@ -123,22 +136,30 @@ form#add-book label[for="read"] {
   margin: 0;
 }
 
-.book-card .book-info {
+.bookStatus {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0.5em
+  margin-top: auto;
+}
+
+.bookStatus > * {
+  margin: 0.25em;
+  flex: 1;
 }
 
 @media (min-width: 568px) {
   .book-card {
-    width: clamp(10rem, 25vw,12.5rem);
+    width: clamp(10rem, 25vw, 12.5rem);
     flex-direction: column;
     align-items: center;
   }
 
   .book-card img {
+    display: block;
     width: 100%;
+  }
+
+  .bookCard-info {
+    padding: 0.5em 0 0 0;
   }
 }
 
