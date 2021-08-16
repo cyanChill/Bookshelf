@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input {
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="number"] {
+  border: 0;
+  border-radius: 0.5em;
+  outline: 0;
+}
+
+.btn {
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: 0;
+  border-radius: 0.5em;
+  outline: 0;
+  cursor: pointer;
+  color: #fff;
+  background-color: #b19cd9;
+}
+
+body {
+  line-height: 1.6;
+}
+
+#book-form-screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: none;
+  opacity: 0;
+  transition: all 250ms;
+}
+
+#book-form-screen.add-book-form-enter {
+  display: block;
+}
+
+#book-form-screen.add-book-form-active {
+  opacity: 1;
+}
+
+form#add-book {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(236, 236, 236);
+  padding: 1em;
+  border-radius: 0.5em;
+}
