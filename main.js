@@ -1,13 +1,11 @@
-const body = document.querySelector("body");
 const library = document.getElementById("library");
 const addNewBookBtn = document.getElementById("new-book");
 const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
 
-let myLibrary = JSON.parse(localStorage.getItem("libraryBooks")) || [];
-let entries = myLibrary.length;
+let myLibrary = [];
 
-function Book(title, author, pages, read, bookImg = "") {
+function Book(title, author, pages, read, bookImg) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -16,64 +14,81 @@ function Book(title, author, pages, read, bookImg = "") {
 }
 
 function loadBooks() {
-  if (!myLibrary) return;
-  myLibrary.forEach((book, idx) => {
-    addBookToDisplay(book, idx);
+  let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
+  books.forEach((book) => {
+    myLibrary.push(
+      new Book(book.title, book.author, book.pages, book.read, book.bookImg)
+    );
+  });
+  myLibrary.forEach((book) => {
+    addBookToDisplay(book);
   });
 }
 
-function addBookToDisplay(book, idx) {
+function addBookToDisplay(book) {
   const bookCard = document.createElement("div");
   bookCard.classList.add("book-card");
+
+  const bookImg = document.createElement("img");
   const bookImgURL = book.bookImg || "missing_cover.jpg";
-  bookCard.innerHTML = `
-    <img src="${bookImgURL}" alt="${book.title} cover image">
-    <div class="bookCard-info">
-      <div class="book-info">
-        <p class="title">${book.title}</p>
-        <p class="author">${book.author}</p>
-        <p class="pages">${book.pages} pages</p>
-      </div>
-      <div class="bookStatus">
-        <button class='btn readBtn ${
-          book.read ? "active-reading" : ""
-        }' onclick="updateReadStatus(${idx})">
-          ${book.read ? "Read" : "Not Read"}
-        </button>
-        <button class="btn deleteBtn" onclick="removeBook(${idx})">
-          Delete
-        </button>
-      </div>
-    </div>
-  `;
+  bookImg.setAttribute("src", bookImgURL);
+  bookImg.setAttribute("alt", book.title + "cover image");
+
+  const bookCardInfo = document.createElement("div");
+  bookCardInfo.classList.add("bookCard-info");
+
+  const bookInfo = document.createElement("div");
+  bookInfo.classList.add("book-info");
+  const title = document.createElement("p");
+  title.classList.add("title");
+  title.textContent = book.title;
+  const author = document.createElement("p");
+  author.classList.add("author");
+  author.textContent = book.author;
+  const pages = document.createElement("p");
+  pages.classList.add("pages");
+  pages.textContent = book.pages + " pages";
+
+  const bookStatus = document.createElement("div");
+  bookStatus.classList.add("bookStatus");
+
+  const readBtn = document.createElement("button");
+  readBtn.classList = `btn readBtn ${book.read ? "active-reading" : ""}`;
+  readBtn.textContent = book.read ? "Read" : "Not Read";
+
+  readBtn.addEventListener("click", () => {
+    book.read = !book.read;
+    readBtn.textContent = book.read ? "Read" : "Not Read";
+    readBtn.classList.toggle("active-reading");
+    updateLocalStorage();
+  });
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList = "btn deleteBtn";
+  deleteBtn.textContent = "Delete";
+
+  deleteBtn.addEventListener("click", () => {
+    bookCard.classList.add("disappear");
+    setTimeout(() => bookCard.classList.add("hidden"), 250);
+    myLibrary.splice(myLibrary.indexOf(book), 1);
+    updateLocalStorage();
+  });
+
+  bookCard.appendChild(bookImg);
+  bookCard.appendChild(bookCardInfo);
+  bookCardInfo.appendChild(bookInfo);
+  bookInfo.appendChild(title);
+  bookInfo.appendChild(author);
+  bookInfo.appendChild(pages);
+  bookCardInfo.appendChild(bookStatus);
+  bookStatus.appendChild(readBtn);
+  bookStatus.appendChild(deleteBtn);
+
   library.appendChild(bookCard);
 }
 
-function removeBook(idx) {
-  myLibrary[idx] = {};
-  const bookCard = library.children[idx];
-  bookCard.classList.add("disappear");
-  setTimeout(() => bookCard.classList.add("hidden"), 250);
-  updateLocalStorage();
-}
-
-function updateReadStatus(idx) {
-  myLibrary[idx] = {
-    ...myLibrary[idx],
-    read: !myLibrary[idx].read,
-  };
-  const bookCard = library.children[idx];
-  const readBtn = bookCard.querySelector(".readBtn");
-  readBtn.textContent = myLibrary[idx].read ? "Read" : "Not Read";
-  readBtn.classList.toggle("active-reading");
-  updateLocalStorage();
-}
-
 function updateLocalStorage() {
-  const books = myLibrary.filter((book) => {
-    return book.title && book.author && book.pages;
-  });
-  localStorage.setItem("libraryBooks", JSON.stringify(books));
+  localStorage.setItem("libraryBooks", JSON.stringify(myLibrary));
 }
 
 addNewBookBtn.addEventListener("click", showForm);
@@ -90,7 +105,7 @@ function submitForm(e) {
   );
   myLibrary.push(newBook);
   updateLocalStorage();
-  addBookToDisplay(newBook, entries++);
+  addBookToDisplay(newBook);
   addBookForm.reset();
   hideForm();
 }
