@@ -5,6 +5,7 @@ const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
 
 let myLibrary = JSON.parse(localStorage.getItem("libraryBooks")) || [];
+let entries = myLibrary.length;
 
 function Book(title, author, pages, read, bookImg = "") {
   this.title = title;
@@ -14,36 +15,61 @@ function Book(title, author, pages, read, bookImg = "") {
   this.bookImg = bookImg;
 }
 
-function addBookToLibrary() {}
-
 function loadBooks() {
   if (!myLibrary) return;
-  myLibrary.forEach((book) => {
-    addBookToDisplay(book);
+  myLibrary.forEach((book, idx) => {
+    addBookToDisplay(book, idx);
   });
 }
 
-function addBookToDisplay(book) {
+function addBookToDisplay(book, idx) {
   const bookCard = document.createElement("div");
   bookCard.classList.add("book-card");
   const bookImgURL = book.bookImg || "missing_cover.jpg";
   bookCard.innerHTML = `
     <img src="${bookImgURL}" alt="${book.title} cover image">
-    <div class="book-info">
-      <p class="title">${book.title}</p>
-      <p class="author">${book.author}</p>
-      <p class="pages">${book.pages} pages</p>
+    <div class="bookCard-info">
+      <div class="book-info">
+        <p class="title">${book.title}</p>
+        <p class="author">${book.author}</p>
+        <p class="pages">${book.pages} pages</p>
+      </div>
+      <div class="bookStatus">
+        <button class="btn readBtn" onclick="updateReadStatus(${idx})">
+          ${book.read ? "Read" : "Not Read"}
+        </button>
+        <button class="btn deleteBtn" onclick="removeBook(${idx})">
+          Delete
+        </button>
+      </div>
     </div>
   `;
   library.appendChild(bookCard);
 }
 
-function removeBook() {}
+function removeBook(idx) {
+  myLibrary[idx] = {};
+  const bookCard = library.children.item(idx);
+  bookCard.classList.add("hidden");
+  updateLocalStorage();
+}
 
-function updateReadStatus() {}
+function updateReadStatus(idx) {
+  myLibrary[idx] = {
+    ...myLibrary[idx],
+    read: !myLibrary[idx].read,
+  };
+  updateLocalStorage();
+}
+
+function updateLocalStorage() {
+  const books = myLibrary.filter((book) => {
+    return book.title && book.author && book.pages;
+  });
+  localStorage.setItem("libraryBooks", JSON.stringify(books));
+}
 
 addNewBookBtn.addEventListener("click", showForm);
-// Listen to when form is submitted
 document.addEventListener("submit", submitForm);
 
 function submitForm(e) {
@@ -56,8 +82,8 @@ function submitForm(e) {
     e.target.bookImg.value
   );
   myLibrary.push(newBook);
-  localStorage.setItem("libraryBooks", JSON.stringify(myLibrary));
-  addBookToDisplay(newBook);
+  updateLocalStorage();
+  addBookToDisplay(newBook, ++entries);
   addBookForm.reset();
   hideForm();
 }
@@ -72,11 +98,7 @@ function showForm() {
   );
   bookFormScreen.classList.add("active");
   // Listen to if we click outside the form (to close "add form" screen)
-  document.addEventListener("click", (e) => {
-    if (e.target.dataset.hasOwnProperty("outside")) {
-      hideForm();
-    }
-  });
+  document.addEventListener("click", exitForm);
 }
 
 function hideForm() {
@@ -87,8 +109,10 @@ function hideForm() {
   );
 }
 
-function exitForm() {
-  bookFormScreen.classList.remove("active");
+function exitForm(e) {
+  if (e.target.dataset.hasOwnProperty("outside")) {
+    hideForm();
+  }
 }
 
 // Initialization:
