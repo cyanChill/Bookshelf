@@ -38,6 +38,7 @@ input:focus {
   cursor: pointer;
   color: #fff;
   background: #b19cd9;
+  transition: background 150ms ease-in;
 }
 
 .btn:hover {
@@ -73,6 +74,10 @@ input:focus {
 
 .deleteBtn:hover {
   background: #c01919;
+}
+
+.disappear {
+  opacity: 0;
 }
 
 .hidden {
@@ -167,6 +172,7 @@ form#add-book label[for="read"] {
   display: flex;
   padding: 0.5em;
   margin: 0.5em;
+  transition: opacity 250ms ease-in;
 }
 
 .book-card img {
