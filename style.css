@@ -104,3 +104,46 @@ form#add-book label[for="read"] {
   display: flex;
   justify-content: center;
 }
+
+.book-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5em;
+  width: 95%;
+  display: flex;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.book-card img {
+  width: 5rem;
+}
+
+.book-info > * {
+  padding: 0;
+  margin: 0;
+}
+
+.book-card .book-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5em
+}
+
+@media (min-width: 568px) {
+  .book-card {
+    width: clamp(10rem, 25vw,12.5rem);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-card img {
+    width: 100%;
+  }
+}
+
+#library {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
