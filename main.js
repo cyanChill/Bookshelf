@@ -35,7 +35,7 @@ function addBookToDisplay(book, idx) {
         <p class="pages">${book.pages} pages</p>
       </div>
       <div class="bookStatus">
-        <button class="btn readBtn" onclick="updateReadStatus(${idx})">
+        <button class='btn readBtn ${book.read ? 'active-reading' : ''}' onclick="updateReadStatus(${idx})">
           ${book.read ? "Read" : "Not Read"}
         </button>
         <button class="btn deleteBtn" onclick="removeBook(${idx})">
@@ -49,7 +49,7 @@ function addBookToDisplay(book, idx) {
 
 function removeBook(idx) {
   myLibrary[idx] = {};
-  const bookCard = library.children.item(idx);
+  const bookCard = library.children[idx];
   bookCard.classList.add("hidden");
   updateLocalStorage();
 }
@@ -59,6 +59,10 @@ function updateReadStatus(idx) {
     ...myLibrary[idx],
     read: !myLibrary[idx].read,
   };
+  const bookCard = library.children[idx];
+  const readBtn = bookCard.querySelector(".readBtn");
+  readBtn.textContent = myLibrary[idx].read ? "Read" : "Not Read";
+  readBtn.classList.toggle('active-reading');
   updateLocalStorage();
 }
 
@@ -83,7 +87,7 @@ function submitForm(e) {
   );
   myLibrary.push(newBook);
   updateLocalStorage();
-  addBookToDisplay(newBook, ++entries);
+  addBookToDisplay(newBook, entries++);
   addBookForm.reset();
   hideForm();
 }
