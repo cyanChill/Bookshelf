@@ -27,32 +27,45 @@ function loadBooks() {
 
 function addBookToDisplay(book) {
   const bookCard = document.createElement("div");
+  library.appendChild(bookCard);
   bookCard.classList.add("book-card");
 
   const bookImg = document.createElement("img");
+  bookCard.appendChild(bookImg);
+
   const bookImgURL = book.bookImg || "missing_cover.jpg";
   bookImg.setAttribute("src", bookImgURL);
   bookImg.setAttribute("alt", book.title + "cover image");
 
   const bookCardInfo = document.createElement("div");
+  bookCard.appendChild(bookCardInfo);
   bookCardInfo.classList.add("bookCard-info");
 
   const bookInfo = document.createElement("div");
+  bookCardInfo.appendChild(bookInfo);
   bookInfo.classList.add("book-info");
+
   const title = document.createElement("p");
+  bookInfo.appendChild(title);
   title.classList.add("title");
   title.textContent = book.title;
+
   const author = document.createElement("p");
+  bookInfo.appendChild(author);
   author.classList.add("author");
   author.textContent = book.author;
+
   const pages = document.createElement("p");
+  bookInfo.appendChild(pages);
   pages.classList.add("pages");
   pages.textContent = book.pages + " pages";
 
   const bookStatus = document.createElement("div");
+  bookCardInfo.appendChild(bookStatus);
   bookStatus.classList.add("bookStatus");
 
   const readBtn = document.createElement("button");
+  bookStatus.appendChild(readBtn);
   readBtn.classList = `btn readBtn ${book.read ? "active-reading" : ""}`;
   readBtn.textContent = book.read ? "Read" : "Not Read";
 
@@ -64,6 +77,7 @@ function addBookToDisplay(book) {
   });
 
   const deleteBtn = document.createElement("button");
+  bookStatus.appendChild(deleteBtn);
   deleteBtn.classList = "btn deleteBtn";
   deleteBtn.textContent = "Delete";
 
@@ -73,18 +87,6 @@ function addBookToDisplay(book) {
     myLibrary.splice(myLibrary.indexOf(book), 1);
     updateLocalStorage();
   });
-
-  bookCard.appendChild(bookImg);
-  bookCard.appendChild(bookCardInfo);
-  bookCardInfo.appendChild(bookInfo);
-  bookInfo.appendChild(title);
-  bookInfo.appendChild(author);
-  bookInfo.appendChild(pages);
-  bookCardInfo.appendChild(bookStatus);
-  bookStatus.appendChild(readBtn);
-  bookStatus.appendChild(deleteBtn);
-
-  library.appendChild(bookCard);
 }
 
 function updateLocalStorage() {
