@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
+
 *,
 *::before,
 *::after {
@@ -42,12 +45,45 @@ input:focus {
   background: #9680be;
 }
 
+.readBtn {
+  font-weight: bold;
+  color: black;
+  background: #f0d49f;
+}
+
+.readBtn:hover {
+  background: #91e9a0;
+}
+
+.active-reading {
+  background: #91e9a0;
+}
+
+.active-reading:hover {
+  background: #f0d49f;
+}
+
+.deleteBtn {
+  font-weight: bold;
+  background: #d17777;
+}
+
+.deleteBtn:hover {
+  background: #c01919;
+}
+
+.hidden {
+  display: none !important;
+}
+
 body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
   min-height: 100vh;
+  max-width: 100em;
   position: relative;
+  font-family: "Roboto", sans-serif;
 }
 
 #nav-bar {
@@ -106,7 +142,7 @@ form#add-book label[for="read"] {
 }
 
 .book-card {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 0.5em;
   width: 95%;
   display: flex;
@@ -124,7 +160,6 @@ form#add-book label[for="read"] {
   justify-content: space-around;
   width: 100%;
   height: 100%;
-  padding: 0.5em;
 }
 
 .book-info {
@@ -148,7 +183,7 @@ form#add-book label[for="read"] {
 
 @media (min-width: 568px) {
   .book-card {
-    width: clamp(10rem, 25vw, 12.5rem);
+    width: clamp(10.75rem, 25vw, 12.5rem);
     flex-direction: column;
     align-items: center;
   }
@@ -166,5 +201,5 @@ form#add-book label[for="read"] {
 #library {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
