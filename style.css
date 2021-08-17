@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
+
+:root {
+  --primary: #b19cd9;
+  --read-clr: #91e9a0;
+  --unread-clr: #f0d49f;
+}
 
 *,
 *::before,
@@ -37,7 +42,7 @@ input:focus {
   outline: 0;
   cursor: pointer;
   color: #fff;
-  background: #b19cd9;
+  background: var(--primary);
   transition: background 150ms ease-in;
 }
 
@@ -52,19 +57,19 @@ input:focus {
 .readBtn {
   font-weight: bold;
   color: black;
-  background: #f0d49f;
+  background: var(--unread-clr);
 }
 
 .readBtn:hover {
-  background: #91e9a0;
+  background: var(--read-clr);
 }
 
 .active-reading {
-  background: #91e9a0;
+  background: var(--read-clr);
 }
 
 .active-reading:hover {
-  background: #f0d49f;
+  background: var(--unread-clr);
 }
 
 .deleteBtn {
@@ -175,10 +180,12 @@ form#add-book {
   display: flex;
   flex-direction: column;
   position: fixed;
+  width: clamp(15rem, 50vw, 30rem);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(236, 236, 236);
+  background: #fff;
+  box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.3);
   padding: 1em;
   border-radius: 0.5em;
 }
@@ -186,6 +193,64 @@ form#add-book {
 form#add-book label[for="read"] {
   display: flex;
   justify-content: center;
+}
+
+#add-book input:not([type="submit"]) {
+  border: 1px solid rgb(236, 236, 236);
+}
+
+#bookImg {
+  font-size: 1rem;
+  padding: 0.75em 0.5em;
+}
+
+.form-element {
+  position: relative;
+  height: 2.5em;
+  margin-bottom: 1em;
+}
+
+.form-element input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 1em;
+}
+
+.form-element label.input-label {
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  pointer-events: none;
+  padding: 0.5em;
+  transition: all 250ms ease-in;
+  color: #a9a9ac;
+}
+
+#add-book input:focus + .input-label,
+#add-book input:valid + .input-label {
+  transform: translateY(-30%);
+  font-size: 0.8rem;
+  left: 1em;
+  padding: 0 0.5em;
+  background-color: #fff;
+}
+
+#add-book input:focus + .input-label {
+  color: var(--primary);
+}
+
+#add-book input:valid + .input-label {
+  color: #000;
+}
+
+#add-book input:focus {
+  border: 1px solid var(--primary);
+}
+
+#add-book .form-element.input:valid {
+  border: 1px solid #000;
 }
 
 .book-card {
@@ -270,4 +335,10 @@ form#add-book label[for="read"] {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.note {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
 }
