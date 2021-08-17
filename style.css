@@ -41,6 +41,7 @@ input {
   padding: 0.5em;
   margin: 0.5em 0;
   border: 1px solid transparent;
+  color: var(--txt-clr-main);
   background: var(--bkg-main);
 }
 
@@ -262,8 +263,12 @@ form#add-book label[for="read"] {
 }
 
 #bookImg {
+  font-size: 0.8rem;
+  padding: 0.78125em 0.5em;
+}
+
+#bookImg::placeholder {
   font-size: 1rem;
-  padding: 0.75em 0.5em;
 }
 
 .form-element {
