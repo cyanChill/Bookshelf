@@ -4,6 +4,7 @@
   --primary: #b19cd9;
   --read-clr: #91e9a0;
   --unread-clr: #f0d49f;
+  font-size: 16px;
 }
 
 *,
@@ -106,7 +107,7 @@ body {
 
 #nav-bar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: max-content auto;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -134,8 +135,7 @@ body {
 }
 
 .logo-text {
-  font-weight: bold;
-  font-size: 1.5rem;
+  display: none;
 }
 
 #new-book {
@@ -292,6 +292,14 @@ form#add-book label[for="read"] {
 .bookStatus > * {
   margin: 0.25em;
   flex: 1;
+}
+
+@media (min-width: 350px) {
+  .logo-text {
+    display: block;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 }
 
 @media (min-width: 568px) {
