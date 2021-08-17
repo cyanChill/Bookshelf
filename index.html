@@ -30,30 +30,39 @@
 
       <div id="book-form-screen" data-outside>
         <form id="add-book">
-          <input
-            id="title"
-            name="title"
-            type="text"
-            placeholder="Title"
-            autocomplete="off"
-            required
-          />
-          <input
-            id="author"
-            name="author"
-            type="text"
-            placeholder="Author"
-            autocomplete="off"
-            required
-          />
-          <input id="pages" name=pages" type="number" placeholder="Pages" min=1
-          max=99999 required/>
+          <div class="form-element">
+            <input
+              id="title"
+              class="element-input"
+              name="title"
+              type="text"
+              autocomplete="off"
+              required
+            />
+            <label for="title" class="input-label">Title</label>
+          </div>
+          <div class="form-element">
+            <input
+              id="author"
+              name="author"
+              type="text"
+              autocomplete="off"
+              required
+            />
+            <label for="author" class="input-label">Author</label>
+          </div>
+          <div class="form-element">
+            <input id="pages" name=pages" type="number" min=1 max=99999
+            required/>
+            <label for="pages" class="input-label">Number of Pages</label>
+          </div>
+
           <input
             id="bookImg"
             name="bookImg"
             type="url"
-            placeholder="Book Image Link"
             autocomplete="off"
+            placeholder="Book Cover Link (optional)"
           />
 
           <label for="read">
@@ -67,7 +76,8 @@
 
       <div id="library">
         <p class="note">
-          You seem to not have any books in your library. Click the "Add New Book" button to get started!
+          You seem to not have any books in your library. Click the "Add New
+          Book" button to get started!
         </p>
       </div>
     </div>
