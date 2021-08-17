@@ -1,11 +1,13 @@
+const body = document.querySelector("body");
 const library = document.getElementById("library");
 const addNewBookBtn = document.getElementById("new-book");
 const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
 const displayOrder = document.getElementById("display-options");
+const displayMode = document.getElementById("display-mode");
 
 let myLibrary = [];
-let sortOrder = "insert-asc";
+let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
 
 function Book(title, author, pages, read, bookImg) {
   this.title = title;
@@ -13,6 +15,13 @@ function Book(title, author, pages, read, bookImg) {
   this.pages = pages;
   this.read = read;
   this.bookImg = bookImg;
+}
+
+function initialization() {
+  body.classList = localStorage.getItem("displaymode") || "";
+  const select = document.getElementById("display-order");
+  select.value = sortOrder;
+  loadBooksFromStorage();
 }
 
 function loadBooksFromStorage() {
@@ -191,7 +200,14 @@ function exitForm(e) {
 displayOrder.addEventListener("change", (e) => {
   sortOrder = e.target.value;
   displayBooks(myLibrary, sortOrder);
+  localStorage.setItem("sortOrder", sortOrder);
+});
+
+displayMode.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  localStorage.setItem("displaymode", body.classList);
+  displayMode.innerHTML = "";
 });
 
 // Initialization:
-loadBooksFromStorage();
+initialization();
