@@ -341,4 +341,5 @@ form#add-book label[for="read"] {
   font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
+  padding: 0 0.5em;
 }
