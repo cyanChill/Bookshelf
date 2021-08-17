@@ -88,13 +88,15 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  display: flex;
+  justify-content: center;
   min-height: 100vh;
   position: relative;
   font-family: "Roboto", sans-serif;
 }
 
 .container {
-  max-width: 100em;
+  width: 100%;
 }
 
 #nav-bar {
@@ -228,6 +230,10 @@ form#add-book label[for="read"] {
 }
 
 @media (min-width: 568px) {
+  .container {
+    max-width: 100em;
+  }
+
   .book-card {
     width: clamp(10.75rem, 25vw, 12.5rem);
     flex-direction: column;
