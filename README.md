@@ -11,3 +11,4 @@ Live Demonstration: https://cyanchill.github.io/Library-App/
 - Utilized dataset to help with detection if the user has clicked outside the form to hide it
 - Learned how to store and retrieve arrays of objects in LocalStorage using JSON
 - Improving transition & animation styling abilities
+- Utilized CSS variables to make a simple dark mode
