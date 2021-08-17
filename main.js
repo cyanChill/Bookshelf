@@ -2,8 +2,10 @@ const library = document.getElementById("library");
 const addNewBookBtn = document.getElementById("new-book");
 const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
+const displayOrder = document.getElementById("display-options");
 
 let myLibrary = [];
+let sortOrder = "insert-asc";
 
 function Book(title, author, pages, read, bookImg) {
   this.title = title;
@@ -13,14 +15,36 @@ function Book(title, author, pages, read, bookImg) {
   this.bookImg = bookImg;
 }
 
-function loadBooks() {
+function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
   books.forEach((book) => {
     myLibrary.push(
       new Book(book.title, book.author, book.pages, book.read, book.bookImg)
     );
   });
-  myLibrary.forEach((book) => {
+  displayBooks(myLibrary, sortOrder);
+}
+
+function displayBooks(books, order) {
+  library.innerHTML = "";
+  let bookOrder = [...books];
+  if (order === "insert-dsc") {
+    bookOrder = bookOrder.reverse();
+  }
+  if (order === "title-asc") {
+    bookOrder = bookOrder.sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
+  }
+  if (order === "title-dsc") {
+    bookOrder = bookOrder.sort((a, b) => {
+      return (
+        a.title.localeCompare(b.title, "en", { sensitivity: "variant" }) * -1
+      );
+    });
+  }
+
+  bookOrder.forEach((book) => {
     addBookToDisplay(book);
   });
 }
@@ -107,7 +131,7 @@ function submitForm(e) {
   );
   myLibrary.push(newBook);
   updateLocalStorage();
-  addBookToDisplay(newBook);
+  displayBooks(myLibrary, sortOrder);
   addBookForm.reset();
   hideForm();
 }
@@ -139,5 +163,10 @@ function exitForm(e) {
   }
 }
 
+displayOrder.addEventListener("change", (e) => {
+  sortOrder = e.target.value;
+  displayBooks(myLibrary, sortOrder);
+});
+
 // Initialization:
-loadBooks();
+loadBooksFromStorage();
