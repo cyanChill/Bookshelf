@@ -10,60 +10,62 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <nav id="nav-bar">
-      <div class="logo">
-        <img class="logo-img" src="favicon.png" alt="site icon" />
-        <span class="logo-text">Library</span>
+    <div class="container">
+      <nav id="nav-bar">
+        <div class="logo">
+          <img class="logo-img" src="favicon.png" alt="site icon" />
+          <span class="logo-text">Library</span>
+        </div>
+        <button id="new-book" class="btn">Add New Book</button>
+        <div id="display-options">
+          <label for="display-order"></label>
+          <select id="display-order">
+            <option value="insert-asc">Insertion Date (asc)</option>
+            <option value="insert-dsc">Insertion Date (dsc)</option>
+            <option value="title-asc">Title (asc)</option>
+            <option value="title-dsc">Title (dsc)</option>
+          </select>
+        </div>
+      </nav>
+
+      <div id="book-form-screen" data-outside>
+        <form id="add-book">
+          <input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Title"
+            autocomplete="off"
+            required
+          />
+          <input
+            id="author"
+            name="author"
+            type="text"
+            placeholder="Author"
+            autocomplete="off"
+            required
+          />
+          <input id="pages" name=pages" type="number" placeholder="Pages" min=1
+          max=99999 required/>
+          <input
+            id="bookImg"
+            name="bookImg"
+            type="url"
+            placeholder="Book Image Link"
+            autocomplete="off"
+          />
+
+          <label for="read">
+            Have you read it?
+            <input id="read" name="read" type="checkbox" />
+          </label>
+
+          <input type="submit" name="submit" id="submit-btn" class="btn" />
+        </form>
       </div>
-      <button id="new-book" class="btn">Add New Book</button>
-      <div id="display-options">
-        <label for="display-order"></label>
-        <select id="display-order">
-          <option value="insert-asc">Insertion Date (asc)</option>
-          <option value="insert-dsc">Insertion Date (dsc)</option>
-          <option value="title-asc">Title (asc)</option>
-          <option value="title-dsc">Title (dsc)</option>
-        </select>
-      </div>
-    </nav>
 
-    <div id="book-form-screen" data-outside>
-      <form id="add-book">
-        <input
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Title"
-          autocomplete="off"
-          required
-        />
-        <input
-          id="author"
-          name="author"
-          type="text"
-          placeholder="Author"
-          autocomplete="off"
-          required
-        />
-        <input id="pages" name=pages" type="number" placeholder="Pages" min=1
-        max=99999 required/>
-        <input
-          id="bookImg"
-          name="bookImg"
-          type="url"
-          placeholder="Book Image Link"
-          autocomplete="off"
-        />
-
-        <label for="read">
-          Have you read it?
-          <input id="read" name="read" type="checkbox" />
-        </label>
-
-        <input type="submit" name="submit" id="submit-btn" class="btn" />
-      </form>
+      <div id="library"></div>
     </div>
-
-    <div id="library"></div>
   </body>
 </html>

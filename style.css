@@ -89,9 +89,12 @@ body {
   padding: 0;
   line-height: 1.6;
   min-height: 100vh;
-  max-width: 100em;
   position: relative;
   font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 100em;
 }
 
 #nav-bar {
