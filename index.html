@@ -5,18 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+    />
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
   </head>
-  <body>
+  <body class="">
     <div class="container">
       <nav id="nav-bar">
         <div class="logo">
           <img class="logo-img" src="favicon.png" alt="site icon" />
           <span class="logo-text">Library</span>
         </div>
-        <button id="new-book" class="btn">Add New Book</button>
+        <div id="action-btns">
+          <button id="new-book" class="btn">Add New Book</button>
+          <button id="display-mode" class="btn icon"></button>
+        </div>
         <div id="display-options">
           <label for="display-order">Sort By:</label>
           <select id="display-order">
