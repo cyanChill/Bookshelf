@@ -17,12 +17,14 @@ function Book(title, author, pages, read, bookImg) {
 
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
-  books.forEach((book) => {
-    myLibrary.push(
-      new Book(book.title, book.author, book.pages, book.read, book.bookImg)
-    );
-  });
-  displayBooks(myLibrary, sortOrder);
+  if (books.length > 0) {
+    books.forEach((book) => {
+      myLibrary.push(
+        new Book(book.title, book.author, book.pages, book.read, book.bookImg)
+      );
+    });
+    displayBooks(myLibrary, sortOrder);
+  }
 }
 
 function displayBooks(books, order) {
@@ -110,6 +112,14 @@ function addBookToDisplay(book) {
     setTimeout(() => bookCard.classList.add("hidden"), 250);
     myLibrary.splice(myLibrary.indexOf(book), 1);
     updateLocalStorage();
+
+    if (myLibrary.length === 0) {
+      library.innerHTML = `
+        <p class="note">
+          You seem to not have any books in your library. Click the "Add New Book" button to get started!
+        </p>
+      `;
+    }
   });
 }
 
