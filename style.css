@@ -345,6 +345,12 @@ form#add-book label[for="read"] {
   justify-content: space-evenly;
 }
 
+.note-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .note {
   font-size: 1.25rem;
   font-weight: bold;
