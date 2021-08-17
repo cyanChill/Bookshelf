@@ -17,13 +17,6 @@ function Book(title, author, pages, read, bookImg) {
   this.bookImg = bookImg;
 }
 
-function initialization() {
-  body.classList = localStorage.getItem("displaymode") || "";
-  const select = document.getElementById("display-order");
-  select.value = sortOrder;
-  loadBooksFromStorage();
-}
-
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
   if (books.length > 0) {
@@ -208,5 +201,10 @@ displayMode.addEventListener("click", () => {
   localStorage.setItem("displaymode", body.classList);
 });
 
-// Initialization:
-initialization();
+// Initialization using IIFE:
+(function () {
+  body.classList = localStorage.getItem("displaymode") || "";
+  const select = document.getElementById("display-order");
+  select.value = sortOrder;
+  loadBooksFromStorage();
+})();
