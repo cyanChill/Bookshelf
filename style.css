@@ -22,6 +22,8 @@
 
   --placeholder-clr: #a9a9ac;
 
+  --mode: "\f185";
+
   font-size: 16px;
 }
 
@@ -110,6 +112,16 @@ input:focus,
   display: none !important;
 }
 
+.icon::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -121,6 +133,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: var(--bkg-main);
   color: var(--txt-clr-main);
+  transition: color 250ms ease-in, background 250ms ease-in;
 }
 
 .container {
@@ -160,11 +173,37 @@ body {
   display: none;
 }
 
-#new-book {
+#action-btns {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   justify-self: end;
-  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#display-mode {
+  background: var(--book-card-bkg);
+  margin-right: 0.5em;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 100%;
+  text-align: center;
+  position: relative;
+  color: var(--txt-clr-main);
+}
+
+#display-mode::before {
+  content: var(--mode);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#display-mode:hover,
+#display-mode:focus {
+  border: 1px solid var(--transparent-accent);
 }
 
 #display-options {
@@ -402,4 +441,6 @@ body.dark {
   --bkg-main: rgb(14, 13, 13);
   --txt-clr-main: #fbfbfd;
   --focus-border: #000;
+
+  --mode: "\f186";
 }
