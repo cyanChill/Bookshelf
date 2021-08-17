@@ -33,7 +33,7 @@ function displayBooks(books, order) {
   }
   if (order === "title-asc") {
     bookOrder = bookOrder.sort((a, b) => {
-      return a.title.localeCompare(b.title);
+      return a.title.localeCompare(b.title, "en", { sensitivity: "variant" });
     });
   }
   if (order === "title-dsc") {
