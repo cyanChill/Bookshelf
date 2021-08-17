@@ -28,16 +28,11 @@ function loadBooksFromStorage() {
 }
 
 function displayBooks(books, order) {
-  if (books.length === 0) {
-    library.innerHTML = `
-      <p class="note">
-        You seem to not have any books in your library. Click the "Add New Book" button to get started!
-      </p>
-    `;
-    return;
-  }
+  if (noBooks(books)) return;
+
   library.innerHTML = "";
   let bookOrder = [...books];
+
   if (order === "insert-dsc") {
     bookOrder = bookOrder.reverse();
   }
@@ -117,22 +112,35 @@ function addBookToDisplay(book) {
 
   deleteBtn.addEventListener("click", () => {
     bookCard.classList.add("disappear");
-    setTimeout(() => bookCard.classList.add("hidden"), 250);
     myLibrary.splice(myLibrary.indexOf(book), 1);
     updateLocalStorage();
-
-    if (myLibrary.length === 0) {
-      library.innerHTML = `
-        <p class="note">
-          You seem to not have any books in your library. Click the "Add New Book" button to get started!
-        </p>
-      `;
-    }
+    setTimeout(() => {
+      bookCard.remove();
+      noBooks(myLibrary);
+    }, 250);
   });
 }
 
 function updateLocalStorage() {
   localStorage.setItem("libraryBooks", JSON.stringify(myLibrary));
+}
+
+function noBooks(books) {
+  if (books.length === 0) {
+    library.innerHTML = `
+      <div class="note-container">
+        <p class="note">
+          You seem to not have any books in your library. Click the "Add New
+          Book" button to get started!
+        </p>
+        <p class="note">
+          Note that this app uses your browser's local storage.
+        </p>
+      </div>
+    `;
+    return true;
+  }
+  return false;
 }
 
 addNewBookBtn.addEventListener("click", showForm);
@@ -162,7 +170,6 @@ function showForm() {
       bookFormScreen.classList.add("form-screen-enter-active"),
     150
   );
-  bookFormScreen.classList.add("active");
   // Listen to if we click outside the form (to close "add form" screen)
   document.addEventListener("click", exitForm);
 }
