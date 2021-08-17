@@ -2,13 +2,31 @@
 
 :root {
   --primary: #b19cd9;
+  --primary-dark: #a183d8;
+
   --read-clr: #91e9a0;
   --unread-clr: #f0d49f;
+  --delete-clr: #d17777;
+
+  --transparent: rgba(255, 255, 255, 0.7);
+  --transparent-accent: rgb(0, 0, 0, 0.3);
+  --transparent-shadow-accent: rgb(0, 0, 0, 0.3);
+
+  --book-card-bkg: rgba(0, 0, 0, 0.05);
+  --author-txt-clr: rgba(0, 0, 0, 0.7);
+  --pages-txt-clr: rgba(0, 0, 0, 0.6);
+
+  --bkg-main: #fff;
+  --txt-clr-main: rgb(14, 13, 13);
+  --focus-border: #000;
+
+  --placeholder-clr: #a9a9ac;
+
   font-size: 16px;
 }
 
 ::placeholder {
-  color: #a9a9ac;
+  color: var(--placeholder-clr);
 }
 
 *,
@@ -21,6 +39,7 @@ input {
   padding: 0.5em;
   margin: 0.5em 0;
   border: 1px solid transparent;
+  background: var(--bkg-main);
 }
 
 input[type="checkbox"] {
@@ -35,8 +54,9 @@ input[type="url"] {
   outline: 0;
 }
 
-input:focus {
-  border: 1px solid black;
+input:focus,
+.btn:focus {
+  border: 1px solid var(--focus-border);
 }
 
 .btn {
@@ -52,16 +72,12 @@ input:focus {
 }
 
 .btn:hover {
-  background: #9680be;
-}
-
-.btn:focus {
-  border: 1px solid black;
+  background: var(--primary-dark);
 }
 
 .readBtn {
   font-weight: bold;
-  color: black;
+  color: var(--focus-border);
   background: var(--unread-clr);
 }
 
@@ -79,7 +95,7 @@ input:focus {
 
 .deleteBtn {
   font-weight: bold;
-  background: #d17777;
+  background: var(--delete-clr);
 }
 
 .deleteBtn:hover {
@@ -103,6 +119,8 @@ body {
   min-height: 100vh;
   position: relative;
   font-family: "Roboto", sans-serif;
+  background-color: var(--bkg-main);
+  color: var(--txt-clr-main);
 }
 
 .container {
@@ -118,8 +136,8 @@ body {
   left: 0;
   padding: 0.25em;
   margin: 0 0.25em;
-  background: rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+  background: var(--transparent);
+  border-bottom: 1px solid var(--transparent-accent);
 }
 
 #nav-bar > span {
@@ -166,7 +184,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--transparent);
   display: none;
   opacity: 0;
   transition: all 250ms ease-in;
@@ -188,9 +206,9 @@ form#add-book {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
-  box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--bkg-main);
+  box-shadow: 3px 3px 5px 2px var(--transparent-shadow-accent);
+  border: 1px solid var(--transparent-shadow-accent);
   padding: 1em;
   border-radius: 0.5em;
 }
@@ -201,7 +219,7 @@ form#add-book label[for="read"] {
 }
 
 #add-book input:not([type="submit"]) {
-  border: 1px solid rgb(236, 236, 236);
+  border: 1px solid var(--transparent-accent);
 }
 
 #bookImg {
@@ -223,14 +241,14 @@ form#add-book label[for="read"] {
   padding-top: 1em;
 }
 
-.form-element label.input-label {
+.form-element .input-label {
   position: absolute;
   top: 0.4em;
   left: 0;
   pointer-events: none;
   padding: 0.5em;
   transition: all 250ms ease-in;
-  color: #a9a9ac;
+  color: var(--placeholder-clr);
 }
 
 #add-book input:focus + .input-label,
@@ -239,7 +257,7 @@ form#add-book label[for="read"] {
   font-size: 0.8rem;
   left: 1em;
   padding: 0 0.5em;
-  background-color: #fff;
+  background: var(--bkg-main);
 }
 
 #add-book input:focus + .input-label {
@@ -247,7 +265,7 @@ form#add-book label[for="read"] {
 }
 
 #add-book input:valid + .input-label {
-  color: #000;
+  color: var(--transparent-accent);
 }
 
 #add-book input:focus {
@@ -255,11 +273,11 @@ form#add-book label[for="read"] {
 }
 
 #add-book .form-element.input:valid {
-  border: 1px solid #000;
+  border: 1px solid var(--transparent-accent);
 }
 
 .book-card {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--book-card-bkg);
   border-radius: 0.5em;
   width: 95%;
   display: flex;
@@ -336,12 +354,12 @@ form#add-book label[for="read"] {
 .author {
   font-size: 0.8rem;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--author-txt-clr);
 }
 
 .pages {
   font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--pages-txt-clr);
 }
 
 #library {
@@ -361,4 +379,27 @@ form#add-book label[for="read"] {
   font-weight: bold;
   text-align: center;
   padding: 0 0.5em;
+}
+
+/* Dark Mode */
+
+body.dark {
+  --primary: #a183d8;
+  --primary-dark: #8258cf;
+
+  --read-clr: #71df84;
+  --unread-clr: #dfb76e;
+  --delete-clr: #c46060;
+
+  --transparent: rgba(0, 0, 0, 0.7);
+  --transparent-accent: rgb(255, 255, 255, 0.5);
+  --transparent-shadow-accent: rgb(255, 255, 255, 0.1);
+
+  --book-card-bkg: rgba(255, 255, 255, 0.1);
+  --author-txt-clr: rgba(255, 255, 255, 0.7);
+  --pages-txt-clr: rgba(255, 255, 255, 0.6);
+
+  --bkg-main: rgb(14, 13, 13);
+  --txt-clr-main: #fbfbfd;
+  --focus-border: #000;
 }
