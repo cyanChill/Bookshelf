@@ -7,6 +7,10 @@
   font-size: 16px;
 }
 
+::placeholder {
+  color: #a9a9ac;
+}
+
 *,
 *::before,
 *::after {
