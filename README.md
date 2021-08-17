@@ -13,6 +13,6 @@ Live Demonstration: https://cyanchill.github.io/Library-App/
 - Improving transition & animation styling abilities
 - Utilized CSS variables to make a simple dark mode
 
-### Project Info
+## Project Info
 
 More about the project can be found at: https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/library
