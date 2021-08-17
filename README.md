@@ -8,5 +8,6 @@ Live Demonstration: https://cyanchill.github.io/Library-App/
 
 - Utilizing the "sticky" value for "position" to keep the navbar at the top of the screen
 - Utilize absolute & relative positioning along with opacity to display a book form on screen when the user click the "Add New Book" button and hides the form if the user submits or clicks away from the form
+- Utilized dataset to help with detection if the user has clicked outside the form to hide it
 - Learned how to store and retrieve arrays of objects in LocalStorage using JSON
-- Improving my transition styling
+- Improving transition & animation styling abilities
