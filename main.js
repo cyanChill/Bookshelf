@@ -206,7 +206,6 @@ displayOrder.addEventListener("change", (e) => {
 displayMode.addEventListener("click", () => {
   body.classList.toggle("dark");
   localStorage.setItem("displaymode", body.classList);
-  displayMode.innerHTML = "";
 });
 
 // Initialization:
