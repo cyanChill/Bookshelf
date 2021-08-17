@@ -28,6 +28,14 @@ function loadBooksFromStorage() {
 }
 
 function displayBooks(books, order) {
+  if (books.length === 0) {
+    library.innerHTML = `
+      <p class="note">
+        You seem to not have any books in your library. Click the "Add New Book" button to get started!
+      </p>
+    `;
+    return;
+  }
   library.innerHTML = "";
   let bookOrder = [...books];
   if (order === "insert-dsc") {
