@@ -9,21 +9,21 @@ const displayMode = document.getElementById("display-mode");
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
 
-function Book(title, author, pages, read, bookImg) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.bookImg = bookImg;
+class Book {
+  constructor(title, author, pages, read, bookImg) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.bookImg = bookImg;
+  }
 }
 
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
   if (books.length > 0) {
     books.forEach((book) => {
-      myLibrary.push(
-        new Book(book.title, book.author, book.pages, book.read, book.bookImg)
-      );
+      myLibrary.push(new Book(book.title, book.author, book.pages, book.read, book.bookImg));
     });
     displayBooks(myLibrary, sortOrder);
   }
@@ -45,9 +45,7 @@ function displayBooks(books, order) {
   }
   if (order === "title-dsc") {
     bookOrder = bookOrder.sort((a, b) => {
-      return (
-        a.title.localeCompare(b.title, "en", { sensitivity: "variant" }) * -1
-      );
+      return a.title.localeCompare(b.title, "en", { sensitivity: "variant" }) * -1;
     });
   }
 
@@ -178,10 +176,7 @@ function showForm() {
 
 function hideForm() {
   document.removeEventListener("click", exitForm);
-  bookFormScreen.classList.remove(
-    "form-screen-enter",
-    "form-screen-enter-active"
-  );
+  bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
 }
 
 function exitForm(e) {
