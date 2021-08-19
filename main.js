@@ -114,10 +114,10 @@ function addBookToDisplay(book) {
     bookCard.classList.add("disappear");
     myLibrary.splice(myLibrary.indexOf(book), 1);
     updateLocalStorage();
-    setTimeout(() => {
+    bookCard.addEventListener("transitionend", () => {
       bookCard.remove();
       noBooks(myLibrary);
-    }, 250);
+    });
   });
 }
 
