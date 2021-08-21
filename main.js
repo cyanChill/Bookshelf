@@ -5,9 +5,15 @@ const bookFormScreen = document.getElementById("book-form-screen");
 const addBookForm = document.getElementById("add-book");
 const displayOrder = document.getElementById("display-options");
 const displayMode = document.getElementById("display-mode");
+const deleteBtn = document.getElementById("deleteBtn");
 
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
+let formMode = "submit";
+let currCard = {
+  domElement: null,
+  bookObj: null,
+};
 
 class Book {
   constructor(title, author, pages, read, bookImg) {
@@ -89,26 +95,45 @@ function addBookToDisplay(book) {
   pages.classList.add("pages");
   pages.textContent = book.pages + " pages";
 
+  const readStatusDiv = document.createElement("div");
+  bookInfo.appendChild(readStatusDiv);
+  readStatusDiv.classList.add("reading-status");
+  const readIcon = document.createElement("span");
+  const readIconClass =
+    book.read === "Currently Reading"
+      ? "read"
+      : book.read === "Planning to Read"
+      ? "planning"
+      : book.read === "Dropped"
+      ? "dropped"
+      : "notread";
+  readStatusDiv.appendChild(readIcon);
+  readIcon.classList = `read-icon ${readIconClass}`;
+  const readStatus = document.createElement("p");
+  readStatusDiv.appendChild(readStatus);
+  readStatus.textContent = book.read;
+
   const bookStatus = document.createElement("div");
   bookCardInfo.appendChild(bookStatus);
   bookStatus.classList.add("bookStatus");
 
-  const readBtn = document.createElement("button");
-  bookStatus.appendChild(readBtn);
-  readBtn.classList = `btn readBtn ${book.read ? "active-reading" : ""}`;
-  readBtn.textContent = book.read ? "Read" : "Not Read";
+  const editBtn = document.createElement("button");
+  bookStatus.appendChild(editBtn);
+  editBtn.classList = "btn editBtn";
+  editBtn.innerHTML = `Edit <i class="far fa-edit"></i>`;
 
-  readBtn.addEventListener("click", () => {
-    book.read = !book.read;
-    readBtn.textContent = book.read ? "Read" : "Not Read";
-    readBtn.classList.toggle("active-reading");
-    updateLocalStorage();
+  editBtn.addEventListener("click", (e) => {
+    showForm();
+    currCard.domElement = e.target.parentNode.parentNode.parentNode;
+    currCard.bookObj = book;
+    deleteBtn.classList.remove("hidden");
   });
 
+  /*
   const deleteBtn = document.createElement("button");
   bookStatus.appendChild(deleteBtn);
   deleteBtn.classList = "btn deleteBtn";
-  deleteBtn.textContent = "Delete";
+  deleteBtn.innerHTML = `<i class="fas fa-trash"></i>`;
 
   deleteBtn.addEventListener("click", () => {
     bookCard.classList.add("disappear");
@@ -119,6 +144,7 @@ function addBookToDisplay(book) {
       noBooks(myLibrary);
     });
   });
+  */
 }
 
 function updateLocalStorage() {
@@ -146,20 +172,46 @@ function noBooks(books) {
 addNewBookBtn.addEventListener("click", showForm);
 document.addEventListener("submit", submitForm);
 
+deleteBtn.addEventListener("click", () => {
+  hideForm();
+  currCard.domElement.classList.add("disappear");
+  myLibrary.splice(myLibrary.indexOf(currCard.bookObj), 1);
+  updateLocalStorage();
+  currCard.domElement.addEventListener("transitionend", () => {
+    currCard.domElement.remove();
+    noBooks(myLibrary);
+    currCard = {
+      domElement: null,
+      bookObj: null,
+    };
+  });
+});
+
 function submitForm(e) {
   e.preventDefault();
+  let readValue = "Not Reading";
+  if (e.target.readStatus.value === "planning") {
+    readValue = "Planning to Read";
+  } else if (e.target.readStatus.value === "reading") {
+    readValue = "Currently Reading";
+  } else if (e.target.readStatus.value === "dropped") {
+    readValue = "Dropped";
+  }
+
   const newBook = new Book(
     e.target.title.value,
     e.target.author.value,
     e.target.pages.value,
-    e.target.read.checked,
+    readValue,
     e.target.bookImg.value
   );
-  myLibrary.push(newBook);
-  updateLocalStorage();
-  displayBooks(myLibrary, sortOrder);
-  addBookForm.reset();
-  hideForm();
+  if (formMode === "submit") {
+    myLibrary.push(newBook);
+    updateLocalStorage();
+    displayBooks(myLibrary, sortOrder);
+    addBookForm.reset();
+    hideForm();
+  }
 }
 
 function showForm() {
@@ -176,6 +228,8 @@ function showForm() {
 
 function hideForm() {
   document.removeEventListener("click", exitForm);
+  deleteBtn.classList.add("hidden");
+  addBookForm.reset();
   bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
 }
 
