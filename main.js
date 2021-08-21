@@ -7,6 +7,7 @@ const displayOrder = document.getElementById("display-options");
 const displayMode = document.getElementById("display-mode");
 const deleteBtn = document.getElementById("deleteBtn");
 const searchBar = document.getElementById("searchbar");
+const submitBtn = document.getElementById("submit-btn");
 
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
@@ -50,14 +51,9 @@ displayMode.addEventListener("click", () => {
   localStorage.setItem("displaymode", body.classList);
 });
 
-searchBar.addEventListener("input", debounce(filterBooks, 250, false));
+addBookForm.addEventListener("input", debounce(isFormSame, 250, false));
 
-function filterBooks() {
-  const queriedBooks = myLibrary.filter((book) =>
-    book.title.toLowerCase().includes(searchBar.value.toLowerCase())
-  );
-  displayBooks(queriedBooks, sortOrder);
-}
+searchBar.addEventListener("input", debounce(filterBooks, 250, false));
 
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
@@ -172,6 +168,7 @@ function addBookToDisplay(book) {
     addBookForm.pages.value = book.pages;
     addBookForm.bookImg.value = book.bookImg;
     addBookForm.readStatus.value = book.read;
+    submitBtn.setAttribute("disabled", "true");
     formMode = "card";
     deleteBtn.classList.remove("hidden");
   });
@@ -197,6 +194,27 @@ function noBooks(books) {
     return true;
   }
   return false;
+}
+
+function filterBooks() {
+  const queriedBooks = myLibrary.filter((book) =>
+    book.title.toLowerCase().includes(searchBar.value.toLowerCase())
+  );
+  displayBooks(queriedBooks, sortOrder);
+}
+
+function isFormSame() {
+  if (
+    addBookForm.title.value === currCard.bookObj.title &&
+    addBookForm.author.value === currCard.bookObj.author &&
+    addBookForm.pages.value === currCard.bookObj.pages &&
+    addBookForm.bookImg.value === currCard.bookObj.bookImg &&
+    addBookForm.readStatus.value === currCard.bookObj.read
+  ) {
+    submitBtn.setAttribute("disabled", "");
+  } else {
+    submitBtn.removeAttribute("disabled");
+  }
 }
 
 function submitForm(e) {
