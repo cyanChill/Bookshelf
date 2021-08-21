@@ -4,9 +4,10 @@
   --primary: #b19cd9;
   --primary-dark: #a183d8;
 
-  --read-clr: #91e9a0;
-  --unread-clr: #f0d49f;
+  --read-clr: #3be057;
+  --planning-clr: rgb(97, 97, 255);
   --delete-clr: #d17777;
+  --delete-hover-clr: #c01919;
 
   --transparent: rgba(255, 255, 255, 0.7);
   --transparent-accent: rgb(0, 0, 0, 0.3);
@@ -98,31 +99,13 @@ input:focus,
   background: var(--primary-dark);
 }
 
-.readBtn {
-  font-weight: bold;
-  color: var(--focus-border);
-  background: var(--unread-clr);
-}
-
-.readBtn:hover {
-  background: var(--read-clr);
-}
-
-.active-reading {
-  background: var(--read-clr);
-}
-
-.active-reading:hover {
-  background: var(--unread-clr);
-}
-
 .deleteBtn {
   font-weight: bold;
   background: var(--delete-clr);
 }
 
 .deleteBtn:hover {
-  background: #c01919;
+  background: var(--delete-hover-clr);
 }
 
 .disappear {
@@ -268,6 +251,7 @@ body {
   display: none;
   opacity: 0;
   transition: all 250ms ease-in;
+  z-index: 1;
 }
 
 #book-form-screen.form-screen-enter {
@@ -293,9 +277,8 @@ form#add-book {
   border-radius: 0.5em;
 }
 
-form#add-book label[for="read"] {
-  display: flex;
-  justify-content: center;
+form#add-book label[for="readStatus"] {
+  gap: 1rem;
 }
 
 #add-book input:not([type="submit"]) {
@@ -388,6 +371,49 @@ form#add-book label[for="read"] {
 
 .book-info > * {
   padding: 0;
+  margin: 0;
+}
+
+.reading-status {
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0 0.5em;
+  margin-top: 0.75em;
+
+  border-radius: 0.5em;
+  border: 1px solid black;
+  background: rgb(216, 216, 216);
+}
+
+.read-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+}
+
+.notread {
+  background: var(--placeholder-clr);
+}
+
+.read {
+  background: var(--read-clr);
+}
+
+.dropped {
+  background: var(--delete-hover-clr);
+}
+
+.planning {
+  background: var(--planning-clr);
+}
+
+.reading-status p {
   margin: 0;
 }
 
