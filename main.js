@@ -6,6 +6,7 @@ const addBookForm = document.getElementById("add-book");
 const displayOrder = document.getElementById("display-options");
 const displayMode = document.getElementById("display-mode");
 const deleteBtn = document.getElementById("deleteBtn");
+const searchBar = document.getElementById("searchbar");
 
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
@@ -48,6 +49,15 @@ displayMode.addEventListener("click", () => {
   body.classList.toggle("dark");
   localStorage.setItem("displaymode", body.classList);
 });
+
+searchBar.addEventListener("input", debounce(filterBooks, 250, false));
+
+function filterBooks() {
+  const queriedBooks = myLibrary.filter((book) =>
+    book.title.toLowerCase().includes(searchBar.value.toLowerCase())
+  );
+  displayBooks(queriedBooks, sortOrder);
+}
 
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
@@ -234,6 +244,22 @@ function exitForm(e) {
   if (e.target.dataset.hasOwnProperty("outside")) {
     hideForm();
   }
+}
+
+function debounce(func, wait, immediate = true) {
+  var timeout;
+  return function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
 }
 
 // Initialization using IIFE:
