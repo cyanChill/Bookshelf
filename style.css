@@ -4,8 +4,8 @@
   --primary: #b19cd9;
   --primary-dark: #a183d8;
 
-  --read-clr: #3be057;
-  --planning-clr: rgb(97, 97, 255);
+  --read-clr: #5edd74;
+  --finished-reading-clr: rgb(144, 144, 255);
   --edit-clr: rgb(240, 201, 96);
   --delete-clr: #d17777;
   --delete-hover-clr: #c01919;
@@ -429,11 +429,11 @@ form#add-book label[for="readStatus"] {
   border-radius: 50%;
 }
 
-.notread {
+.planning {
   background: var(--placeholder-clr);
 }
 
-.read {
+.reading {
   background: var(--read-clr);
 }
 
@@ -441,8 +441,8 @@ form#add-book label[for="readStatus"] {
   background: var(--delete-hover-clr);
 }
 
-.planning {
-  background: var(--planning-clr);
+.finished {
+  background: var(--finished-reading-clr);
 }
 
 .reading-status p {
