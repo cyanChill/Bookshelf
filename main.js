@@ -22,6 +22,33 @@ class Book {
   }
 }
 
+/* Event Listeners */
+addNewBookBtn.addEventListener("click", showForm);
+document.addEventListener("submit", submitForm);
+
+deleteBtn.addEventListener("click", () => {
+  hideForm();
+  currCard.domElement.classList.add("disappear");
+  myLibrary.splice(myLibrary.indexOf(currCard.bookObj), 1);
+  updateLocalStorage();
+  currCard.domElement.addEventListener("transitionend", () => {
+    currCard.domElement.remove();
+    noBooks(myLibrary);
+    currCard = {};
+  });
+});
+
+displayOrder.addEventListener("change", (e) => {
+  sortOrder = e.target.value;
+  displayBooks(myLibrary, sortOrder);
+  localStorage.setItem("sortOrder", sortOrder);
+});
+
+displayMode.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  localStorage.setItem("displaymode", body.classList);
+});
+
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
   if (books.length > 0) {
@@ -101,18 +128,18 @@ function addBookToDisplay(book) {
   const readStatus = document.createElement("p");
   readStatusDiv.appendChild(readStatus);
 
-  if (book.read === "planning") {
-    readIcon.classList = "read-icon planning";
-    readStatus.textContent = "Planning to Read";
+  if (book.read === "finished") {
+    readIcon.classList = "read-icon finished";
+    readStatus.textContent = "Finished Reading";
   } else if (book.read === "reading") {
-    readIcon.classList = "read-icon read";
+    readIcon.classList = "read-icon reading";
     readStatus.textContent = "Currently Reading";
   } else if (book.read === "dropped") {
     readIcon.classList = "read-icon dropped";
     readStatus.textContent = "Dropped";
   } else {
-    readIcon.classList = "read-icon notread";
-    readStatus.textContent = "Not Reading";
+    readIcon.classList = "read-icon planning";
+    readStatus.textContent = "Planning to Read";
   }
 
   const bookStatus = document.createElement("div");
@@ -138,23 +165,6 @@ function addBookToDisplay(book) {
     formMode = "card";
     deleteBtn.classList.remove("hidden");
   });
-
-  /*
-  const deleteBtn = document.createElement("button");
-  bookStatus.appendChild(deleteBtn);
-  deleteBtn.classList = "btn deleteBtn";
-  deleteBtn.innerHTML = `<i class="fas fa-trash"></i>`;
-
-  deleteBtn.addEventListener("click", () => {
-    bookCard.classList.add("disappear");
-    myLibrary.splice(myLibrary.indexOf(book), 1);
-    updateLocalStorage();
-    bookCard.addEventListener("transitionend", () => {
-      bookCard.remove();
-      noBooks(myLibrary);
-    });
-  });
-  */
 }
 
 function updateLocalStorage() {
@@ -178,21 +188,6 @@ function noBooks(books) {
   }
   return false;
 }
-
-addNewBookBtn.addEventListener("click", showForm);
-document.addEventListener("submit", submitForm);
-
-deleteBtn.addEventListener("click", () => {
-  hideForm();
-  currCard.domElement.classList.add("disappear");
-  myLibrary.splice(myLibrary.indexOf(currCard.bookObj), 1);
-  updateLocalStorage();
-  currCard.domElement.addEventListener("transitionend", () => {
-    currCard.domElement.remove();
-    noBooks(myLibrary);
-    currCard = {};
-  });
-});
 
 function submitForm(e) {
   e.preventDefault();
@@ -240,17 +235,6 @@ function exitForm(e) {
     hideForm();
   }
 }
-
-displayOrder.addEventListener("change", (e) => {
-  sortOrder = e.target.value;
-  displayBooks(myLibrary, sortOrder);
-  localStorage.setItem("sortOrder", sortOrder);
-});
-
-displayMode.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  localStorage.setItem("displaymode", body.classList);
-});
 
 // Initialization using IIFE:
 (function () {
