@@ -10,10 +10,7 @@ const deleteBtn = document.getElementById("deleteBtn");
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
 let formMode = "submit";
-let currCard = {
-  domElement: null,
-  bookObj: null,
-};
+let currCard = {};
 
 class Book {
   constructor(title, author, pages, read, bookImg) {
@@ -98,20 +95,25 @@ function addBookToDisplay(book) {
   const readStatusDiv = document.createElement("div");
   bookInfo.appendChild(readStatusDiv);
   readStatusDiv.classList.add("reading-status");
+
   const readIcon = document.createElement("span");
-  const readIconClass =
-    book.read === "Currently Reading"
-      ? "read"
-      : book.read === "Planning to Read"
-      ? "planning"
-      : book.read === "Dropped"
-      ? "dropped"
-      : "notread";
   readStatusDiv.appendChild(readIcon);
-  readIcon.classList = `read-icon ${readIconClass}`;
   const readStatus = document.createElement("p");
   readStatusDiv.appendChild(readStatus);
-  readStatus.textContent = book.read;
+
+  if (book.read === "planning") {
+    readIcon.classList = "read-icon planning";
+    readStatus.textContent = "Planning to Read";
+  } else if (book.read === "reading") {
+    readIcon.classList = "read-icon read";
+    readStatus.textContent = "Currently Reading";
+  } else if (book.read === "dropped") {
+    readIcon.classList = "read-icon dropped";
+    readStatus.textContent = "Dropped";
+  } else {
+    readIcon.classList = "read-icon notread";
+    readStatus.textContent = "Not Reading";
+  }
 
   const bookStatus = document.createElement("div");
   bookCardInfo.appendChild(bookStatus);
@@ -124,8 +126,16 @@ function addBookToDisplay(book) {
 
   editBtn.addEventListener("click", (e) => {
     showForm();
-    currCard.domElement = e.target.parentNode.parentNode.parentNode;
-    currCard.bookObj = book;
+    currCard = {
+      domElement: e.target.parentNode.parentNode.parentNode,
+      bookObj: book,
+    };
+    addBookForm.title.value = book.title;
+    addBookForm.author.value = book.author;
+    addBookForm.pages.value = book.pages;
+    addBookForm.bookImg.value = book.bookImg;
+    addBookForm.readStatus.value = book.read;
+    formMode = "card";
     deleteBtn.classList.remove("hidden");
   });
 
@@ -180,38 +190,29 @@ deleteBtn.addEventListener("click", () => {
   currCard.domElement.addEventListener("transitionend", () => {
     currCard.domElement.remove();
     noBooks(myLibrary);
-    currCard = {
-      domElement: null,
-      bookObj: null,
-    };
+    currCard = {};
   });
 });
 
 function submitForm(e) {
   e.preventDefault();
-  let readValue = "Not Reading";
-  if (e.target.readStatus.value === "planning") {
-    readValue = "Planning to Read";
-  } else if (e.target.readStatus.value === "reading") {
-    readValue = "Currently Reading";
-  } else if (e.target.readStatus.value === "dropped") {
-    readValue = "Dropped";
-  }
 
   const newBook = new Book(
     e.target.title.value,
     e.target.author.value,
     e.target.pages.value,
-    readValue,
+    e.target.readStatus.value,
     e.target.bookImg.value
   );
   if (formMode === "submit") {
     myLibrary.push(newBook);
-    updateLocalStorage();
-    displayBooks(myLibrary, sortOrder);
-    addBookForm.reset();
-    hideForm();
+  } else if (formMode === "card") {
+    myLibrary.splice(myLibrary.indexOf(currCard.bookObj), 1, newBook);
   }
+  updateLocalStorage();
+  displayBooks(myLibrary, sortOrder);
+  addBookForm.reset();
+  hideForm();
 }
 
 function showForm() {
@@ -230,6 +231,7 @@ function hideForm() {
   document.removeEventListener("click", exitForm);
   deleteBtn.classList.add("hidden");
   addBookForm.reset();
+  formMode = "submit";
   bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
 }
 
