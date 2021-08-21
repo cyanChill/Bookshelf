@@ -6,6 +6,7 @@
 
   --read-clr: #3be057;
   --planning-clr: rgb(97, 97, 255);
+  --edit-clr: rgb(240, 201, 96);
   --delete-clr: #d17777;
   --delete-hover-clr: #c01919;
 
@@ -99,12 +100,26 @@ input:focus,
   background: var(--primary-dark);
 }
 
-.deleteBtn {
+.editBtn {
+  font-weight: bold;
+  color: black;
+  background: var(--edit-clr);
+}
+
+.editBtn i {
+  pointer-events: none;
+}
+
+.editBtn:hover {
+  background: rgb(240, 189, 49);
+}
+
+#deleteBtn {
   font-weight: bold;
   background: var(--delete-clr);
 }
 
-.deleteBtn:hover {
+#deleteBtn:hover {
   background: var(--delete-hover-clr);
 }
 
@@ -120,6 +135,10 @@ input:focus,
   font-variant: normal;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+  display: none;
 }
 
 body {
@@ -177,27 +196,6 @@ body {
   display: none;
 }
 
-#new-book {
-  width: 2.5rem;
-  height: 2.5rem;
-
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-
-  font-size: 1.5rem;
-  padding: 0;
-  margin: 0;
-
-  border-radius: 50%;
-  transition: all 250ms ease-in;
-}
-
-#new-book:hover,
-#new-book:focus {
-  transform: scale(1.05);
-}
-
 #display-mode {
   width: 2.5em;
   height: 2.5em;
@@ -241,6 +239,27 @@ body {
   padding-right: 0.5em;
 }
 
+#new-book {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+
+  border-radius: 50%;
+  transition: all 250ms ease-in;
+}
+
+#new-book:hover,
+#new-book:focus {
+  transform: scale(1.05);
+}
+
 #book-form-screen {
   position: fixed;
   top: 0;
@@ -279,6 +298,7 @@ form#add-book {
 
 form#add-book label[for="readStatus"] {
   gap: 1rem;
+  margin: 0.5em 0;
 }
 
 #add-book input:not([type="submit"]) {
@@ -343,6 +363,17 @@ form#add-book label[for="readStatus"] {
   border: 1px solid var(--transparent-accent);
 }
 
+#status-btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+#status-btns > * {
+  flex: 1;
+}
+
 .book-card {
   background: var(--book-card-bkg);
   border-radius: 0.5em;
@@ -388,6 +419,7 @@ form#add-book label[for="readStatus"] {
 
   border-radius: 0.5em;
   border: 1px solid black;
+  color: black;
   background: rgb(216, 216, 216);
 }
 
@@ -503,8 +535,6 @@ body.dark {
   --primary: #a183d8;
   --primary-dark: #8258cf;
 
-  --read-clr: #71df84;
-  --unread-clr: #dfb76e;
   --delete-clr: #c46060;
 
   --transparent: rgba(0, 0, 0, 0.7);
