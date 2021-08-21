@@ -2,6 +2,7 @@
 
 :root {
   --primary: #b19cd9;
+  --primary-disabled: #bfb2d8;
   --primary-dark: #a183d8;
 
   --read-clr: #5edd74;
@@ -94,6 +95,12 @@ input:focus,
   color: #fff;
   background: var(--primary);
   transition: background 150ms ease-in;
+}
+
+.btn[disabled],
+.btn[disabled]:hover {
+  cursor: default;
+  background-color: var(--primary-disabled);
 }
 
 .btn:hover {
