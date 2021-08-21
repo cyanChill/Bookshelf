@@ -140,13 +140,15 @@ input:focus,
 }
 
 body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  position: relative;
+
   font-family: "Roboto", sans-serif;
   background-color: var(--bkg-main);
   color: var(--txt-clr-main);
@@ -154,6 +156,8 @@ body {
 }
 
 .container {
+  position: relative;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -190,23 +194,43 @@ body {
   display: none;
 }
 
-#action-btns {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 1em;
+#new-book {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+
+  border-radius: 50%;
+  transition: all 250ms ease-in;
+}
+
+#new-book:hover,
+#new-book:focus {
+  transform: scale(1.05);
 }
 
 #display-mode {
-  background: var(--book-card-bkg);
-  margin-right: 0.5em;
   width: 2.5em;
   height: 2.5em;
-  border-radius: 100%;
-  text-align: center;
+
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-self: end;
+
   position: relative;
+
+  text-align: center;
+  margin-right: 0.5em;
+
+  border-radius: 100%;
+  border: 1px solid var(--book-card-bkg);
+  background: var(--bkg-main);
   color: var(--txt-clr-main);
 }
 
@@ -403,6 +427,12 @@ form#add-book label[for="read"] {
 
   .bookCard-info {
     padding: 0.5em 0 0 0;
+  }
+}
+
+@media (min-width: 100em) {
+  #new-book {
+    right: calc((100vw - 100rem) / 2 + 1rem);
   }
 }
 

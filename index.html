@@ -5,10 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" />
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
@@ -20,10 +17,9 @@
           <img class="logo-img" src="favicon.png" alt="site icon" />
           <span class="logo-text">Library</span>
         </div>
-        <div id="action-btns">
-          <button id="new-book" class="btn">Add New Book</button>
-          <button id="display-mode" class="btn icon"></button>
-        </div>
+
+        <button id="display-mode" class="btn icon"></button>
+
         <div id="display-options">
           <label for="display-order">Sort By:</label>
           <select id="display-order">
@@ -49,18 +45,11 @@
             <label for="title" class="input-label">Title</label>
           </div>
           <div class="form-element">
-            <input
-              id="author"
-              name="author"
-              type="text"
-              autocomplete="off"
-              required
-            />
+            <input id="author" name="author" type="text" autocomplete="off" required />
             <label for="author" class="input-label">Author</label>
           </div>
           <div class="form-element">
-            <input id="pages" name=pages" type="number" min=1 max=99999
-            required/>
+            <input id="pages" name=pages" type="number" min=1 max=99999 required/>
             <label for="pages" class="input-label">Number of Pages</label>
           </div>
 
@@ -81,15 +70,15 @@
         </form>
       </div>
 
+      <button id="new-book" class="btn">+</button>
+
       <div id="library">
         <div class="note-container">
           <p class="note">
-            You seem to not have any books in your library. Click the "Add New
-            Book" button to get started!
+            You seem to not have any books in your library. Click the "Add New Book" button to get
+            started!
           </p>
-          <p class="note">
-            Note that this app uses your browser's local storage.
-          </p>
+          <p class="note">Note that this app uses your browser's local storage.</p>
         </div>
       </div>
     </div>
