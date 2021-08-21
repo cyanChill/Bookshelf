@@ -61,9 +61,14 @@
             placeholder="Book Cover Link (optional)"
           />
 
-          <label for="read">
-            Have you read it?
-            <input id="read" name="read" type="checkbox" />
+          <label for="readStatus">
+            Reading Status:
+            <select name="readStatus" id="readStatus">
+              <option value="not-read">Not Reading</option>
+              <option value="planning">Planning to Read</option>
+              <option value="reading">Currently Reading</option>
+              <option value="dropped">Dropped</option>
+            </select>
           </label>
 
           <input type="submit" name="submit" id="submit-btn" class="btn" />
