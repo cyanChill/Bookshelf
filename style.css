@@ -163,6 +163,7 @@ body {
   width: 100%;
 }
 
+/* Navbar stuff */
 #nav-bar {
   display: grid;
   grid-template-columns: max-content auto;
@@ -196,6 +197,7 @@ body {
   display: none;
 }
 
+/* Light/Dark Mode Button */
 #display-mode {
   width: 2.5em;
   height: 2.5em;
@@ -228,6 +230,7 @@ body {
   border: 1px solid var(--transparent-accent);
 }
 
+/* Sort By Element */
 #display-options {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
@@ -239,6 +242,19 @@ body {
   padding-right: 0.5em;
 }
 
+/* Search Bar Stuff */
+#search-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#searchbar {
+  text-align: center;
+  border: 1px solid var(--placeholder-clr);
+}
+
+/* Add Book Button */
 #new-book {
   width: 2.5rem;
   height: 2.5rem;
@@ -260,6 +276,7 @@ body {
   transform: scale(1.05);
 }
 
+/* Book Form Screen */
 #book-form-screen {
   position: fixed;
   top: 0;
@@ -281,6 +298,7 @@ body {
   opacity: 1;
 }
 
+/* Actual form on Book Form Screen */
 form#add-book {
   display: flex;
   flex-direction: column;
@@ -314,6 +332,7 @@ form#add-book label[for="readStatus"] {
   font-size: 1rem;
 }
 
+/* Form Elements with Unique Animations */
 .form-element {
   position: relative;
   height: 2.5em;
@@ -363,6 +382,7 @@ form#add-book label[for="readStatus"] {
   border: 1px solid var(--transparent-accent);
 }
 
+/* Holds delete & submit buttons in form*/
 #status-btns {
   width: 100%;
   display: flex;
@@ -374,6 +394,14 @@ form#add-book label[for="readStatus"] {
   flex: 1;
 }
 
+/* Container for our books */
+#library {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* Book card styling */
 .book-card {
   background: var(--book-card-bkg);
   border-radius: 0.5em;
@@ -405,6 +433,23 @@ form#add-book label[for="readStatus"] {
   margin: 0;
 }
 
+/* Styling for book info (title, author, pages)*/
+.title {
+  font-weight: bold;
+}
+
+.author {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--author-txt-clr);
+}
+
+.pages {
+  font-size: 0.7rem;
+  color: var(--pages-txt-clr);
+}
+
+/* Read Status div element in book info */
 .reading-status {
   width: max-content;
 
@@ -459,6 +504,20 @@ form#add-book label[for="readStatus"] {
   flex: 1;
 }
 
+/* Note styling for when there's no books in our library */
+.note-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.note {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 0.5em;
+}
+
 @media (min-width: 350px) {
   .logo-text {
     display: block;
@@ -492,41 +551,6 @@ form#add-book label[for="readStatus"] {
   #new-book {
     right: calc((100vw - 100rem) / 2 + 1rem);
   }
-}
-
-/* Styling for book info (title, author, pages)*/
-.title {
-  font-weight: bold;
-}
-
-.author {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: var(--author-txt-clr);
-}
-
-.pages {
-  font-size: 0.7rem;
-  color: var(--pages-txt-clr);
-}
-
-#library {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.note-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.note {
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 0 0.5em;
 }
 
 /* Dark Mode */
