@@ -4,6 +4,14 @@ A simple library app that keeps track of the books read.
 
 Live Demonstration: https://cyanchill.github.io/Library-App/
 
+## Features
+
+- Adding/Editing/Deleting Books to you library
+- Searching books in your library
+- Sorting books by insertion date or title
+- Filter book by read status
+- Light/Dark mode
+
 ## What I've Learned:
 
 - Utilizing the "sticky" value for "position" to keep the navbar at the top of the screen
