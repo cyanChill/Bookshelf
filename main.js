@@ -8,11 +8,14 @@ const displayMode = document.getElementById("display-mode");
 const deleteBtn = document.getElementById("deleteBtn");
 const searchBar = document.getElementById("searchbar");
 const submitBtn = document.getElementById("submit-btn");
+const filterBtn = document.getElementById("filterBtn");
+const filterFormScreen = document.getElementById("filter-form-screen");
 
 let myLibrary = [];
 let sortOrder = localStorage.getItem("sortOrder") || "insert-asc";
 let formMode = "submit";
 let currCard = {};
+let filterTags = [];
 
 class Book {
   constructor(title, author, pages, read, bookImg) {
@@ -52,8 +55,8 @@ displayMode.addEventListener("click", () => {
 });
 
 addBookForm.addEventListener("input", debounce(isFormSame, 250, false));
-
 searchBar.addEventListener("input", debounce(filterBooks, 250, false));
+filterBtn.addEventListener("click", showForm);
 
 function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
@@ -70,6 +73,13 @@ function displayBooks(books, order) {
 
   library.innerHTML = "";
   let bookOrder = [...books];
+
+  const selectedTagsArr = filterTags.map((tag) => tag.value);
+  if (selectedTagsArr.length > 0) {
+    bookOrder = bookOrder.filter((book) => {
+      return selectedTagsArr.includes(book.read);
+    });
+  }
 
   if (order === "insert-dsc") {
     bookOrder = bookOrder.reverse();
@@ -158,7 +168,7 @@ function addBookToDisplay(book) {
   editBtn.innerHTML = `Edit <i class="far fa-edit"></i>`;
 
   editBtn.addEventListener("click", (e) => {
-    showForm();
+    showForm(e);
     currCard = {
       domElement: e.target.parentNode.parentNode.parentNode,
       bookObj: book,
@@ -238,12 +248,16 @@ function submitForm(e) {
   hideForm();
 }
 
-function showForm() {
-  bookFormScreen.classList.add("form-screen-enter");
+function showForm(e) {
+  const hiddenScreen =
+    e.target.id === "new-book" || [...e.target.classList].includes("editBtn")
+      ? bookFormScreen
+      : filterFormScreen;
+  hiddenScreen.classList.add("form-screen-enter");
   setTimeout(
     () =>
-      bookFormScreen.classList.contains("form-screen-enter") &&
-      bookFormScreen.classList.add("form-screen-enter-active"),
+      hiddenScreen.classList.contains("form-screen-enter") &&
+      hiddenScreen.classList.add("form-screen-enter-active"),
     150
   );
   // Listen to if we click outside the form (to close "add form" screen)
@@ -255,7 +269,12 @@ function hideForm() {
   deleteBtn.classList.add("hidden");
   addBookForm.reset();
   formMode = "submit";
+  if ([...filterFormScreen.classList].includes("form-screen-enter")) {
+    filterTags = [...document.querySelectorAll("#filter-list input[type=checkbox]:checked")];
+    displayBooks(myLibrary, sortOrder);
+  }
   bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
+  filterFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
 }
 
 function exitForm(e) {
