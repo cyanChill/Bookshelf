@@ -48,9 +48,11 @@
             <input id="author" name="author" type="text" autocomplete="off" required />
             <label for="author" class="input-label">Author</label>
           </div>
-          <div class="form-element">
-            <input id="pages" name=pages" type="number" min=1 max=99999 required/>
-            <label for="pages" class="input-label">Number of Pages</label>
+          <div id="form-pages">
+            Pages:
+            <input id="pages-read" type="number" name="pagesRead" min=0 placeholder="read"/>
+            /
+            <input id="pages-total" type="number" name="pagesTotal" min=1 max=99999 placeholder="total" required/>
           </div>
 
           <input
