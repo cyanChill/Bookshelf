@@ -254,6 +254,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5em;
 }
 
 #searchbar {
@@ -283,8 +284,8 @@ body {
   transform: scale(1.05);
 }
 
-/* Book Form Screen */
-#book-form-screen {
+/* Form Screen Class (Handles appearance & disappearance */
+.formScreen {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -297,16 +298,17 @@ body {
   z-index: 1;
 }
 
-#book-form-screen.form-screen-enter {
+.formScreen.form-screen-enter {
   display: block;
 }
 
-#book-form-screen.form-screen-enter-active {
+.form-screen-enter-active {
   opacity: 1;
 }
 
-/* Actual form on Book Form Screen */
-form#add-book {
+/* Actual forms on Form Screen */
+#add-book,
+#filter-list {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -387,6 +389,11 @@ form#add-book label[for="readStatus"] {
 
 #add-book .form-element.input:valid {
   border: 1px solid var(--transparent-accent);
+}
+
+/* Actual form on Filter Form Screen */
+#filter-list h2 {
+  margin: 0 0 0.5rem 0;
 }
 
 /* Holds delete & submit buttons in form*/
