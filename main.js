@@ -267,12 +267,15 @@ function showForm(e) {
 function hideForm() {
   document.removeEventListener("click", exitForm);
   deleteBtn.classList.add("hidden");
+  submitBtn.removeAttribute("disabled");
   addBookForm.reset();
   formMode = "submit";
+
   if ([...filterFormScreen.classList].includes("form-screen-enter")) {
     filterTags = [...document.querySelectorAll("#filter-list input[type=checkbox]:checked")];
     displayBooks(myLibrary, sortOrder);
   }
+
   bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
   filterFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
 }
