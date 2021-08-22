@@ -404,7 +404,11 @@ form#add-book label[for="readStatus"] {
   gap: 0.5em;
 }
 
-#status-btns > * {
+#status-btns #deleteBtn {
+  padding: 0 1em;
+}
+
+#status-btns #submit-btn {
   flex: 1;
 }
 
