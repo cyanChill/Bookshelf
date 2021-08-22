@@ -31,7 +31,7 @@
         </div>
       </nav>
 
-      <div id="book-form-screen" data-outside>
+      <div id="book-form-screen" class="formScreen" data-outside>
         <form id="add-book">
           <div class="form-element">
             <input
@@ -84,6 +84,29 @@
 
       <div id="search-div">
         <input type="text" id="searchbar" placeholder="Search for Books" />
+        <button id="filterBtn" class="btn">Filter</button>
+      </div>
+
+      <div id="filter-form-screen" class="formScreen" data-outside>
+        <div id="filter-list">
+          <h2>Filter By:</h2>
+          <label for="planRead">
+            <input type="checkbox" name="filterTag" id="planRead" value="planning" />
+            Planning to Read
+          </label>
+          <label for="finishRead">
+            <input type="checkbox" name="filterTag" id="finishRead" value="finished" />
+            Finished Reading
+          </label>
+          <label for="CurrRead">
+            <input type="checkbox" name="filterTag" id="CurrRead" value="reading" />
+            Currently Reading
+          </label>
+          <label for="dropRead">
+            <input type="checkbox" name="filterTag" id="dropRead" value="dropped" />
+            Dropped
+          </label>
+        </div>
       </div>
 
       <div id="library">
