@@ -18,10 +18,17 @@ let currCard = {};
 let filterTags = [];
 
 class Book {
-  constructor(title, author, pages, read, bookImg) {
+  constructor(title, author, readpages, totalpages, read, bookImg) {
+    readpages = parseInt(readpages) || 0;
+    totalpages = parseInt(totalpages);
+    if (readpages >= totalpages || read === "finished") {
+      readpages = totalpages;
+      read = "finished";
+    }
     this.title = title;
     this.author = author;
-    this.pages = pages;
+    this.pagesRead = readpages;
+    this.pagesTotal = totalpages;
     this.read = read;
     this.bookImg = bookImg;
   }
@@ -54,7 +61,11 @@ displayMode.addEventListener("click", () => {
   localStorage.setItem("displaymode", body.classList);
 });
 
-addBookForm.addEventListener("input", debounce(isFormSame, 250, false));
+addBookForm.addEventListener("input", () => {
+  if (formMode === "card") {
+    debounce(isFormSame(), 250, false);
+  }
+});
 searchBar.addEventListener("input", debounce(filterBooks, 250, false));
 filterBtn.addEventListener("click", showForm);
 
@@ -62,7 +73,9 @@ function loadBooksFromStorage() {
   let books = JSON.parse(localStorage.getItem("libraryBooks")) || [];
   if (books.length > 0) {
     books.forEach((book) => {
-      myLibrary.push(new Book(book.title, book.author, book.pages, book.read, book.bookImg));
+      myLibrary.push(
+        new Book(book.title, book.author, book.pagesRead, book.pagesTotal, book.read, book.bookImg)
+      );
     });
     displayBooks(myLibrary, sortOrder);
   }
@@ -133,7 +146,7 @@ function addBookToDisplay(book) {
   const pages = document.createElement("p");
   bookInfo.appendChild(pages);
   pages.classList.add("pages");
-  pages.textContent = book.pages + " pages";
+  pages.textContent = `Pages: ${book.pagesRead} / ${book.pagesTotal}`;
 
   const readStatusDiv = document.createElement("div");
   bookInfo.appendChild(readStatusDiv);
@@ -175,7 +188,8 @@ function addBookToDisplay(book) {
     };
     addBookForm.title.value = book.title;
     addBookForm.author.value = book.author;
-    addBookForm.pages.value = book.pages;
+    addBookForm.pagesRead.value = book.pagesRead;
+    addBookForm.pagesTotal.value = book.pagesTotal;
     addBookForm.bookImg.value = book.bookImg;
     addBookForm.readStatus.value = book.read;
     submitBtn.setAttribute("disabled", "true");
@@ -216,7 +230,8 @@ function isFormSame() {
   if (
     addBookForm.title.value === currCard.bookObj.title &&
     addBookForm.author.value === currCard.bookObj.author &&
-    addBookForm.pages.value === currCard.bookObj.pages &&
+    addBookForm.pagesRead.value === currCard.bookObj.pagesRead &&
+    addBookForm.pagesTotal.value === currCard.bookObj.pagesTotal &&
     addBookForm.bookImg.value === currCard.bookObj.bookImg &&
     addBookForm.readStatus.value === currCard.bookObj.read
   ) {
@@ -232,7 +247,8 @@ function submitForm(e) {
   const newBook = new Book(
     e.target.title.value,
     e.target.author.value,
-    e.target.pages.value,
+    e.target.pagesRead.value,
+    e.target.pagesTotal.value,
     e.target.readStatus.value,
     e.target.bookImg.value
   );
