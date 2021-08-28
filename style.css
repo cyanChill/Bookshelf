@@ -471,7 +471,7 @@ form#add-book label[for="readStatus"] {
 }
 
 .author {
-  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
   font-weight: bold;
   color: var(--author-txt-clr);
 }
@@ -495,7 +495,6 @@ form#add-book label[for="readStatus"] {
   margin-top: 0.75em;
 
   border-radius: 0.5em;
-  border: 1px solid black;
   color: black;
   background: rgb(216, 216, 216);
 }
