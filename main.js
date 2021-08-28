@@ -230,8 +230,8 @@ function isFormSame() {
   if (
     addBookForm.title.value === currCard.bookObj.title &&
     addBookForm.author.value === currCard.bookObj.author &&
-    addBookForm.pagesRead.value === currCard.bookObj.pagesRead &&
-    addBookForm.pagesTotal.value === currCard.bookObj.pagesTotal &&
+    parseInt(addBookForm.pagesRead.value) === currCard.bookObj.pagesRead &&
+    parseInt(addBookForm.pagesTotal.value) === currCard.bookObj.pagesTotal &&
     addBookForm.bookImg.value === currCard.bookObj.bookImg &&
     addBookForm.readStatus.value === currCard.bookObj.read
   ) {
