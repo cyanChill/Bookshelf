@@ -178,11 +178,7 @@ function addBookToDisplay(book) {
   const editBtn = document.createElement("button");
   bookStatus.appendChild(editBtn);
   editBtn.classList = "btn editBtn";
-
-  const editIcon = document.createElement("i");
-  editIcon.classList = "far fa-edit";
-  editBtn.textContent = "Edit ";
-  editBtn.appendChild(editIcon);
+  editBtn.innerHTML = `Edit <i class="far fa-edit"></i>`;
 
   editBtn.addEventListener("click", (e) => {
     showForm(e);
@@ -208,27 +204,20 @@ function updateLocalStorage() {
 
 function noBooks(books) {
   if (books.length === 0) {
-    library.textContent = "";
-    const noteContainer = document.createElement("div");
-    noteContainer.classList.add("note-container");
-    library.appendChild(noteContainer);
-    const note1 = createNote(
-      `You seem to not have any books. Click the "+" button to add some books!`
-    );
-    const note2 = createNote("Note that this app uses your browser's local storage.");
-    noteContainer.appendChild(note1);
-    noteContainer.appendChild(note2);
+    library.innerHTML = `
+      <div class="note-container">
+        <p class="note">
+          You seem to not have any books. Click the "+" button to add some books!
+        </p>
+        <p class="note">
+          Note that this app uses your browser's local storage.
+        </p>
+      </div>
+    `;
 
     return true;
   }
   return false;
-}
-
-function createNote(msg) {
-  const note = document.createElement("p");
-  note.classList.add("note");
-  note.textContent = msg;
-  return note;
 }
 
 function filterBooks() {
