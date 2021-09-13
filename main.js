@@ -266,7 +266,7 @@ function submitForm(e) {
 
 function showForm(e) {
   const hiddenScreen =
-    e.target.id === "new-book" || [...e.target.classList].includes("editBtn")
+    e.target.id === "new-book" || e.target.classList.contains("editBtn")
       ? bookFormScreen
       : filterFormScreen;
   hiddenScreen.classList.add("form-screen-enter");
@@ -287,7 +287,7 @@ function hideForm() {
   addBookForm.reset();
   formMode = "submit";
 
-  if ([...filterFormScreen.classList].includes("form-screen-enter")) {
+  if (filterFormScreen.classList.contains("form-screen-enter")) {
     filterTags = [...document.querySelectorAll("#filter-list input[type=checkbox]:checked")];
     displayBooks(myLibrary, sortOrder);
   }
