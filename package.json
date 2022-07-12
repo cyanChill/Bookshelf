@@ -1,0 +1,33 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "A simple library app that keeps track of the books read.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ./public -c-1",
+    "generate-sw": "npx workbox-cli injectManifest workbox-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyanChill/Library-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyanChill/Library-App/issues"
+  },
+  "homepage": "https://github.com/cyanChill/Library-App#readme",
+  "devDependencies": {
+    "uglify-js": "^3.16.2",
+    "workbox-cli": "^6.5.3"
+  },
+  "dependencies": {
+    "workbox-background-sync": "^6.5.3",
+    "workbox-core": "^6.5.3",
+    "workbox-expiration": "^6.5.3",
+    "workbox-precaching": "^6.5.3",
+    "workbox-routing": "^6.5.3",
+    "workbox-strategies": "^6.5.3"
+  }
+}

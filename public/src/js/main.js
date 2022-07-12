@@ -74,7 +74,14 @@ function loadBooksFromStorage() {
   if (books.length > 0) {
     books.forEach((book) => {
       myLibrary.push(
-        new Book(book.title, book.author, book.pagesRead, book.pagesTotal, book.read, book.bookImg)
+        new Book(
+          book.title,
+          book.author,
+          book.pagesRead,
+          book.pagesTotal,
+          book.read,
+          book.bookImg
+        )
       );
     });
     displayBooks(myLibrary, sortOrder);
@@ -104,7 +111,9 @@ function displayBooks(books, order) {
   }
   if (order === "title-dsc") {
     bookOrder = bookOrder.sort((a, b) => {
-      return a.title.localeCompare(b.title, "en", { sensitivity: "variant" }) * -1;
+      return (
+        a.title.localeCompare(b.title, "en", { sensitivity: "variant" }) * -1
+      );
     });
   }
 
@@ -121,7 +130,7 @@ function addBookToDisplay(book) {
   const bookImg = document.createElement("img");
   bookCard.appendChild(bookImg);
 
-  const bookImgURL = book.bookImg || "missing_cover.jpg";
+  const bookImgURL = book.bookImg || "../images/missing_cover.jpg";
   bookImg.setAttribute("src", bookImgURL);
   bookImg.setAttribute("alt", book.title + "cover image");
 
@@ -288,12 +297,20 @@ function hideForm() {
   formMode = "submit";
 
   if (filterFormScreen.classList.contains("form-screen-enter")) {
-    filterTags = [...document.querySelectorAll("#filter-list input[type=checkbox]:checked")];
+    filterTags = [
+      ...document.querySelectorAll("#filter-list input[type=checkbox]:checked"),
+    ];
     displayBooks(myLibrary, sortOrder);
   }
 
-  bookFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
-  filterFormScreen.classList.remove("form-screen-enter", "form-screen-enter-active");
+  bookFormScreen.classList.remove(
+    "form-screen-enter",
+    "form-screen-enter-active"
+  );
+  filterFormScreen.classList.remove(
+    "form-screen-enter",
+    "form-screen-enter-active"
+  );
 }
 
 function exitForm(e) {
