@@ -4,18 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library App</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" />
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+    <title>Bookshelf</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="./src/images/favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <script type="module" src="./src/js/app.js" defer></script>
+    <script src="./src/js/main.js" defer></script>
   </head>
   <body class="">
     <div class="container">
       <nav id="nav-bar">
         <div class="logo">
-          <img class="logo-img" src="favicon.png" alt="site icon" />
-          <span class="logo-text">Library</span>
+          <img
+            class="logo-img"
+            src="./src/images/favicon.png"
+            alt="site icon"
+          />
+          <span class="logo-text">Bookshelf</span>
         </div>
 
         <button id="display-mode" class="btn icon"></button>
@@ -45,14 +57,34 @@
             <label for="title" class="input-label">Title</label>
           </div>
           <div class="form-element">
-            <input id="author" name="author" type="text" autocomplete="off" required />
+            <input
+              id="author"
+              name="author"
+              type="text"
+              autocomplete="off"
+              required
+            />
             <label for="author" class="input-label">Author</label>
           </div>
           <div id="form-pages">
             Pages:
-            <input id="pages-read" type="number" name="pagesRead" min=0 placeholder="read"/>
+            <input
+              id="pages-read"
+              type="number"
+              name="pagesRead"
+              min="0"
+              placeholder="read"
+            />
             /
-            <input id="pages-total" type="number" name="pagesTotal" min=1 max=99999 placeholder="total" required/>
+            <input
+              id="pages-total"
+              type="number"
+              name="pagesTotal"
+              min="1"
+              max="99999"
+              placeholder="total"
+              required
+            />
           </div>
 
           <input
@@ -93,19 +125,39 @@
         <div id="filter-list">
           <h2>Filter By:</h2>
           <label for="planRead">
-            <input type="checkbox" name="filterTag" id="planRead" value="planning" />
+            <input
+              type="checkbox"
+              name="filterTag"
+              id="planRead"
+              value="planning"
+            />
             Planning to Read
           </label>
           <label for="finishRead">
-            <input type="checkbox" name="filterTag" id="finishRead" value="finished" />
+            <input
+              type="checkbox"
+              name="filterTag"
+              id="finishRead"
+              value="finished"
+            />
             Finished Reading
           </label>
           <label for="CurrRead">
-            <input type="checkbox" name="filterTag" id="CurrRead" value="reading" />
+            <input
+              type="checkbox"
+              name="filterTag"
+              id="CurrRead"
+              value="reading"
+            />
             Currently Reading
           </label>
           <label for="dropRead">
-            <input type="checkbox" name="filterTag" id="dropRead" value="dropped" />
+            <input
+              type="checkbox"
+              name="filterTag"
+              id="dropRead"
+              value="dropped"
+            />
             Dropped
           </label>
         </div>
@@ -114,9 +166,12 @@
       <div id="library">
         <div class="note-container">
           <p class="note">
-            You seem to not have any books. Click the "+" button to add some books!
+            You seem to not have any books. Click the "+" button to add some
+            books!
           </p>
-          <p class="note">Note that this app uses your browser's local storage.</p>
+          <p class="note">
+            Note that this app uses your browser's local storage.
+          </p>
         </div>
       </div>
     </div>
