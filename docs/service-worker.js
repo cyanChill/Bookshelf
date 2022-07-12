@@ -3,9 +3,8 @@ importScripts(
 );
 
 const { clientsClaim } = workbox.core;
-const { BackgroundSyncPlugin } = workbox.backgroundSync;
 const { ExpirationPlugin } = workbox.expiration;
-const { precacheAndRoute, createHandlerBoundToURL } = workbox.precaching;
+const { precacheAndRoute } = workbox.precaching;
 const { registerRoute } = workbox.routing;
 const { StaleWhileRevalidate } = workbox.strategies;
 

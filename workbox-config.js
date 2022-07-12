@@ -1,12 +1,12 @@
 module.exports = {
-	globDirectory: 'public\\',
+	globDirectory: 'docs\\',
 	globPatterns: [
 		'**/*.{html,css}',
 		'src/images/*.{jpg,png}',
 		'src/js/*.js'
 	],
-	swDest: 'public/service-worker.js',
-	swSrc: "public/sw-base.js",
+	swDest: 'docs/service-worker.js',
+	swSrc: "docs/sw-base.js",
 	globIgnores: [
 		"..\\workbox-cli-config.js"
 	]
