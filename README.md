@@ -2,7 +2,7 @@
 
 A simple app that keeps track of the books read.
 
-Live Demonstration: https://cyanchill.github.io/Bookshelf/
+Live Demonstration: https://cyanchill-bookshelf.netlify.app
 
 ## Features
 
