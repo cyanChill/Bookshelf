@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/cyanChill/Bookshelf#readme",
   "devDependencies": {
-    "uglify-js": "^3.16.2",
     "workbox-cli": "^6.5.3"
   }
 }
