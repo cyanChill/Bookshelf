@@ -4,7 +4,7 @@
   "description": "A simple app that keeps track of the books read.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && http-server ./docs -c-1",
+    "start": "npm run build && http-server ./public -c-1",
     "generate-sw": "npx workbox-cli injectManifest workbox-config.js",
     "build": "npm run generate-sw"
   },
