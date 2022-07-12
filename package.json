@@ -1,7 +1,7 @@
 {
-  "name": "library",
+  "name": "bookshelf",
   "version": "1.0.0",
-  "description": "A simple library app that keeps track of the books read.",
+  "description": "A simple app that keeps track of the books read.",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && http-server ./public -c-1",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyanChill/Library-App.git"
+    "url": "git+https://github.com/cyanChill/Bookshelf.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cyanChill/Library-App/issues"
+    "url": "https://github.com/cyanChill/Bookshelf/issues"
   },
-  "homepage": "https://github.com/cyanChill/Library-App#readme",
+  "homepage": "https://github.com/cyanChill/Bookshelf#readme",
   "devDependencies": {
     "uglify-js": "^3.16.2",
     "workbox-cli": "^6.5.3"

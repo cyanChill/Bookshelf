@@ -130,9 +130,14 @@ function addBookToDisplay(book) {
   const bookImg = document.createElement("img");
   bookCard.appendChild(bookImg);
 
-  const bookImgURL = book.bookImg || "../images/missing_cover.jpg";
+  const bookImgURL = book.bookImg || "./src/images/missing_cover.jpg";
   bookImg.setAttribute("src", bookImgURL);
   bookImg.setAttribute("alt", book.title + "cover image");
+
+  // Fallback
+  bookImg.addEventListener("error", function (e) {
+    this.src = "./src/images/missing_cover.jpg";
+  });
 
   const bookCardInfo = document.createElement("div");
   bookCard.appendChild(bookCardInfo);

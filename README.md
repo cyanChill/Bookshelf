@@ -1,13 +1,13 @@
-# Library App
+# Bookshelf
 
-A simple library app that keeps track of the books read.
+A simple app that keeps track of the books read.
 
-Live Demonstration: https://cyanchill.github.io/Library-App/
+Live Demonstration: https://cyanchill.github.io/Bookshelf/
 
 ## Features
 
-- Adding/Editing/Deleting Books to you library
-- Searching books in your library
+- Adding/Editing/Deleting Books to you bookshelf
+- Searching books in your bookshelf
 - Sorting books by insertion date or title
 - Filter book by read status
 - Light/Dark mode
